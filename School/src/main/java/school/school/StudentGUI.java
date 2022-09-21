@@ -21,7 +21,7 @@ public class StudentGUI extends javax.swing.JFrame {
     /**
      * Creates new form StudentGUI
      */
-    public Student S= new Student();
+    public Student S = new Student();    // initializing a variable to access student functions
     public StudentGUI() {
         initComponents();
     }
@@ -265,60 +265,64 @@ public class StudentGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_CourseIDText_ADDActionPerformed
 
     private void AddBtnSTDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddBtnSTDActionPerformed
-         if (STDNameText_ADD.getText().equals(""))
-         {
-             JOptionPane.showMessageDialog(this,"Student Name Field is empty.");
-         }
+        // Checking if there is an empty text box
+        if (STDNameText_ADD.getText().equals(""))
+        {
+            JOptionPane.showMessageDialog(this,"Student Name Field is empty.");
+        }
         else if (STD_IDText_ADD.getText().equals(""))
-         {
-             JOptionPane.showMessageDialog(this,"Student ID Field is empty.");
-         }
+        {
+            JOptionPane.showMessageDialog(this,"Student ID Field is empty.");
+        }
         else if (CourseIDText_ADD.getText().equals(""))
-         {
-             JOptionPane.showMessageDialog(this,"Course ID Field is empty.");
-         }
+        {
+            JOptionPane.showMessageDialog(this,"Course ID Field is empty.");
+        }
         else if (STDGrade_ADD.getText().equals(""))
-         {
-             JOptionPane.showMessageDialog(this,"Grade Field is empty.");
-         }
-      else S.AddStudent();
+        {
+            JOptionPane.showMessageDialog(this,"Grade Field is empty.");
+        }
+       else S.AddStudent(); // in case all fields have been filled, add the student
     }//GEN-LAST:event_AddBtnSTDActionPerformed
 
     private void STD_ShowAllCoursesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_STD_ShowAllCoursesActionPerformed
         // TODO add your handling code here:
-         if (STDShowAllCoursesText.getText().equals(""))
-         {
-             JOptionPane.showMessageDialog(this,"Student ID Field is empty.");
-         }
-         else S.Table_Data_Filling(STD_DataTable," Where ID ="+STDShowAllCoursesText.getText());
+        // Checking if there is an empty text box
+        if (STDShowAllCoursesText.getText().equals(""))
+        {
+            JOptionPane.showMessageDialog(this,"Student ID Field is empty.");
+        }
+        else S.Table_Data_Filling(STD_DataTable," Where ID ="+STDShowAllCoursesText.getText()); // Filling the table with the student's courses
     }//GEN-LAST:event_STD_ShowAllCoursesActionPerformed
 
     private void DelBtnSTDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DelBtnSTDActionPerformed
-         if (STD_ID_Del_Text.getText().equals(""))
-         {
-             JOptionPane.showMessageDialog(this,"Student ID Field is empty.");
-         }
-         else if (STD_CourseID_Del_Text.getText().equals(""))
-         {
-             JOptionPane.showMessageDialog(this,"Course ID Field is empty.");
-         }
-       else S.DeleteStudent();
+        // Checking if there is an empty text box 
+        if (STD_ID_Del_Text.getText().equals(""))
+        {
+            JOptionPane.showMessageDialog(this,"Student ID Field is empty.");
+        }
+        else if (STD_CourseID_Del_Text.getText().equals(""))
+        {
+            JOptionPane.showMessageDialog(this,"Course ID Field is empty.");
+        }
+        else S.DeleteStudent();     // Deleting that student's course data
     }//GEN-LAST:event_DelBtnSTDActionPerformed
 
     private void EditBtnSTDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditBtnSTDActionPerformed
-         if (STD_ID_Edit_Text.getText().equals(""))
-         {
-             JOptionPane.showMessageDialog(this,"Student ID Field is empty.");
-         }
-         else if (STD_CourseID_Edit_Text.getText().equals(""))
-         {
-             JOptionPane.showMessageDialog(this,"Course ID Field is empty.");
-         }
-         else if (STD_Grade_Edit_Text.getText().equals(""))
-         {
-             JOptionPane.showMessageDialog(this,"Grade Field is empty.");
-         }
-         else S.EditStudent();
+        // Checking if there is an empty text box
+        if (STD_ID_Edit_Text.getText().equals(""))
+        {
+            JOptionPane.showMessageDialog(this,"Student ID Field is empty.");
+        }
+        else if (STD_CourseID_Edit_Text.getText().equals(""))
+        {
+            JOptionPane.showMessageDialog(this,"Course ID Field is empty.");
+        }
+        else if (STD_Grade_Edit_Text.getText().equals(""))
+        {
+            JOptionPane.showMessageDialog(this,"Grade Field is empty.");
+        }
+        else S.EditStudent();       // Editing that student's course grade
     }//GEN-LAST:event_EditBtnSTDActionPerformed
 
     /**
@@ -351,6 +355,7 @@ public class StudentGUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                // Showing the Student data window
                 new StudentGUI().setVisible(true);
             }
         });
@@ -388,46 +393,57 @@ public class StudentGUI extends javax.swing.JFrame {
     class Student
     {   
         Student(){};
-         public void AddStudent()
-         {
-            
-             try {
-          int count =  School.s.executeUpdate("insert into Student values ("+ STD_IDText_ADD.getText() +",'"+STDNameText_ADD.getText()+"','"+STDGrade_ADD.getText()+"',"+CourseIDText_ADD.getText()+")");
-            
-        } catch (Exception ex) {
-           JOptionPane.showMessageDialog(new StudentGUI(),"Error has occured, please make sure all the data entered is correct");
-        }
-          Table_Data_Filling(STD_DataTable);  
-        }
-         public void EditStudent()
-         {
-             try {
-          int count =  School.s.executeUpdate("Update Student Set Grade = '"+STD_Grade_Edit_Text.getText()+"' Where ID = "+ STD_ID_Edit_Text.getText() +"AND CourseID = '"+STD_CourseID_Edit_Text.getText()+"'");
-            
-        } catch (Exception ex) {
-           JOptionPane.showMessageDialog(new StudentGUI(),"Error has occured, please make sure all the data entered is correct");
-        }
-          Table_Data_Filling(STD_DataTable);  
-         }
-          public void DeleteStudent()
-         {
-             try {
-          int count =  School.s.executeUpdate("Delete From Student Where ID = "+ STD_ID_Del_Text.getText() +"AND CourseID = '"+STD_CourseID_Del_Text.getText()+"'");
-            
-        } catch (Exception ex) {
-           JOptionPane.showMessageDialog(new StudentGUI(),"Error has occured, please make sure all the data entered is correct");
-        }
-          Table_Data_Filling(STD_DataTable);  
-         }
-         public void Table_Data_Filling(JTable a)
-         {
-             Table_Data_Filling(a, "");
-         }
-         public void Table_Data_Filling(JTable a, String str)
-         {
-             DefaultTableModel dtm = (DefaultTableModel) a.getModel();
-             dtm.setRowCount(0);
+        
+        // Function to add student
+        public void AddStudent()
+        {
             try {
+                int count =  School.s.executeUpdate("insert into Student values ("+ STD_IDText_ADD.getText() +",'"+STDNameText_ADD.getText()+"','"+STDGrade_ADD.getText()+"',"+CourseIDText_ADD.getText()+")");
+                // The query that adds a student to the School database
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(new StudentGUI(),"Error has occured, please make sure all the data entered is correct");
+            }
+                Table_Data_Filling(STD_DataTable);  // Showing the table after modification
+        }
+        
+        // Function to edit student grade
+        public void EditStudent()
+        {
+            try {
+                int count =  School.s.executeUpdate("Update Student Set Grade = '"+STD_Grade_Edit_Text.getText()+"' Where ID = "+ STD_ID_Edit_Text.getText() +"AND CourseID = '"+STD_CourseID_Edit_Text.getText()+"'");
+                // The query that edits a student's grade
+
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(new StudentGUI(),"Error has occured, please make sure all the data entered is correct");
+            }
+                Table_Data_Filling(STD_DataTable);  // Showing the table after modification
+        }
+        
+        // Function to delete student
+        public void DeleteStudent()
+        {
+            try {
+                int count =  School.s.executeUpdate("Delete From Student Where ID = "+ STD_ID_Del_Text.getText() +"AND CourseID = '"+STD_CourseID_Del_Text.getText()+"'");
+                // The query that deletes a student from the database
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(new StudentGUI(),"Error has occured, please make sure all the data entered is correct");
+            }
+                Table_Data_Filling(STD_DataTable);  // Showing the table after modification
+        }
+        
+        // Overloading the function with empty strings to avoid the where clause
+        public void Table_Data_Filling(JTable a)
+        {
+            Table_Data_Filling(a, "");
+        }
+        
+        public void Table_Data_Filling(JTable a, String str)
+        {
+            // Removing top empty rows from the table
+            DefaultTableModel dtm = (DefaultTableModel) a.getModel();
+            dtm.setRowCount(0);
+            try {
+                // Executing the query and filling the table
                 ResultSet rs = School.s.executeQuery("Select * from Student"+ str);
                 ResultSetMetaData rsmd = rs.getMetaData();
                 DefaultTableModel model = (DefaultTableModel) a.getModel();
@@ -445,13 +461,11 @@ public class StudentGUI extends javax.swing.JFrame {
                     grade=rs.getString(3);
                     CourseID=rs.getString(4);
                     String[] row= {ID, name, grade,CourseID};
-                    model.addRow(row);
-                    
+                    model.addRow(row);      // adding a row to the table
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(StudentGUI.class.getName()).log(Level.SEVERE, null, ex);
             }
-        
+        }
     }
-   }
 }
