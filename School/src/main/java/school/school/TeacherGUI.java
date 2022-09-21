@@ -20,7 +20,8 @@ public class TeacherGUI extends javax.swing.JFrame {
 
     /**
      * Creates new form TeacherGUI
-     */Teacher T=  new Teacher();
+     */
+    Teacher T =  new Teacher();    // initializing a variable to access teacher functions
     public TeacherGUI() {
         initComponents();
     }
@@ -255,6 +256,7 @@ public class TeacherGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void DelBtnTCHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DelBtnTCHActionPerformed
+        // Checking if there is an empty text box
         if (TCH_ID_Del_Text.getText().equals(""))
         {
             JOptionPane.showMessageDialog(this,"Teacher ID Field is empty.");
@@ -263,19 +265,21 @@ public class TeacherGUI extends javax.swing.JFrame {
         {
             JOptionPane.showMessageDialog(this,"Course ID Field is empty.");
         }
-        else T.DeleteTeacher();
+        else T.DeleteTeacher();     // Deleting that teacher's course data
     }//GEN-LAST:event_DelBtnTCHActionPerformed
 
     private void TCH_ShowAllCoursesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TCH_ShowAllCoursesActionPerformed
         // TODO add your handling code here:
+        // Checking if there is an empty text box
         if (TCHShowAllCoursesText.getText().equals(""))
         {
             JOptionPane.showMessageDialog(this,"Teacher ID Field is empty.");
         }
-        else T.Table_Data_Filling(TCH_DataTable," Where ID ="+TCHShowAllCoursesText.getText());
+        else T.Table_Data_Filling(TCH_DataTable," Where ID ="+TCHShowAllCoursesText.getText()); // Filling the table with the teacher's courses
     }//GEN-LAST:event_TCH_ShowAllCoursesActionPerformed
 
     private void EditBtnTCHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditBtnTCHActionPerformed
+        // Checking if there is an empty text box
         if (TCH_ID_Edit_Text.getText().equals(""))
         {
             JOptionPane.showMessageDialog(this,"Teacher ID Field is empty.");
@@ -288,10 +292,11 @@ public class TeacherGUI extends javax.swing.JFrame {
         {
             JOptionPane.showMessageDialog(this,"Grade Field is empty.");
         }
-        else T.EditTeacher();
+        else T.EditTeacher();       // Editing that teacher's course grade
     }//GEN-LAST:event_EditBtnTCHActionPerformed
 
     private void AddBtnTCHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddBtnTCHActionPerformed
+        // Checking if there is an empty text box
         if (TCHNameText_ADD.getText().equals(""))
         {
             JOptionPane.showMessageDialog(this,"Teacher Name Field is empty.");
@@ -308,7 +313,7 @@ public class TeacherGUI extends javax.swing.JFrame {
         {
             JOptionPane.showMessageDialog(this,"Grade Field is empty.");
         }
-        else T.AddTeacher();
+        else T.AddTeacher();    // in case all fields have been filled, add the teacher
     }//GEN-LAST:event_AddBtnTCHActionPerformed
 
     private void TCH_CourseIDText_ADDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TCH_CourseIDText_ADDActionPerformed
@@ -345,6 +350,7 @@ public class TeacherGUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                // Showing the Teacher data window
                 new TeacherGUI().setVisible(true);
             }
         });
@@ -383,46 +389,57 @@ public class TeacherGUI extends javax.swing.JFrame {
 class Teacher
     {   
         Teacher(){};
-         public void AddTeacher()
-         {
-            
-             try {
-          int count =  School.s.executeUpdate("insert into Teacher values ("+ TCH_IDText_ADD.getText() +",'"+TCHNameText_ADD.getText()+"','"+TCH_Salary_ADD.getText()+"',"+TCH_CourseIDText_ADD.getText()+")");
-            
-        } catch (Exception ex) {
-           JOptionPane.showMessageDialog(new TeacherGUI(),"Error has occured, please make sure all the data entered is correct");
-        }
-          Table_Data_Filling(TCH_DataTable);  
-        }
-         public void EditTeacher()
-         {
-             try {
-          int count =  School.s.executeUpdate("Update Teacher Set Salary = '"+TCH_Salary_Edit_Text.getText()+"' Where ID = "+ TCH_ID_Edit_Text.getText() +"AND CourseID = '"+TCH_CourseID_Edit_Text.getText()+"'");
-            
-        } catch (Exception ex) {
-           JOptionPane.showMessageDialog(new TeacherGUI(),"Error has occured, please make sure all the data entered is correct");
-        }
-          Table_Data_Filling(TCH_DataTable);  
-         }
-          public void DeleteTeacher()
-         {
-             try {
-          int count =  School.s.executeUpdate("Delete From Teacher Where ID = "+ TCH_ID_Del_Text.getText() +"AND CourseID = '"+TCH_CourseID_Del_Text.getText()+"'");
-            
-        } catch (Exception ex) {
-           JOptionPane.showMessageDialog(new TeacherGUI(),"Error has occured, please make sure all the data entered is correct");
-        }
-          Table_Data_Filling(TCH_DataTable);  
-         }
-         public void Table_Data_Filling(JTable a)
-         {
-             Table_Data_Filling(a, "");
-         }
-         public void Table_Data_Filling(JTable a, String str)
-         {
-             DefaultTableModel dtm = (DefaultTableModel) a.getModel();
-             dtm.setRowCount(0);
+        
+        // Function to add teacher
+        public void AddTeacher()
+        {
+
             try {
+                int count =  School.s.executeUpdate("insert into Teacher values ("+ TCH_IDText_ADD.getText() +",'"+TCHNameText_ADD.getText()+"','"+TCH_Salary_ADD.getText()+"',"+TCH_CourseIDText_ADD.getText()+")");
+                // The query that adds a teacher to the School database
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(new TeacherGUI(),"Error has occured, please make sure all the data entered is correct");
+            }
+            Table_Data_Filling(TCH_DataTable);  // Showing the table after modification
+        }
+         
+        // Function to edit teacher grade
+        public void EditTeacher()
+        {
+            try {
+                int count =  School.s.executeUpdate("Update Teacher Set Salary = '"+TCH_Salary_Edit_Text.getText()+"' Where ID = "+ TCH_ID_Edit_Text.getText() +"AND CourseID = '"+TCH_CourseID_Edit_Text.getText()+"'");
+                // The query that edits a teacher's salary
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(new TeacherGUI(),"Error has occured, please make sure all the data entered is correct");
+            }
+            Table_Data_Filling(TCH_DataTable);  // Showing the table after modification
+        }
+        
+        // Function to delete teacher
+        public void DeleteTeacher()
+        {
+            try {
+                int count =  School.s.executeUpdate("Delete From Teacher Where ID = "+ TCH_ID_Del_Text.getText() +"AND CourseID = '"+TCH_CourseID_Del_Text.getText()+"'");
+                // The query that deletes a teacher from the database
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(new TeacherGUI(),"Error has occured, please make sure all the data entered is correct");
+            }
+            Table_Data_Filling(TCH_DataTable);  // Showing the table after modification
+        }
+        
+        // Overloading the function with empty strings to avoid the where clause
+        public void Table_Data_Filling(JTable a)
+        {
+            Table_Data_Filling(a, "");
+        }
+        
+        public void Table_Data_Filling(JTable a, String str)
+        {
+            // Removing top empty rows from the table
+            DefaultTableModel dtm = (DefaultTableModel) a.getModel();
+            dtm.setRowCount(0);
+            try {
+                // Executing the query and filling the table
                 ResultSet rs = School.s.executeQuery("Select * from Teacher"+ str);
                 ResultSetMetaData rsmd = rs.getMetaData();
                 DefaultTableModel model = (DefaultTableModel) a.getModel();
@@ -440,14 +457,12 @@ class Teacher
                     grade=rs.getString(3);
                     CourseID=rs.getString(4);
                     String[] row= {ID, name, grade,CourseID};
-                    model.addRow(row);
-                    
+                    model.addRow(row);      // adding a row to the table
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(TeacherGUI.class.getName()).log(Level.SEVERE, null, ex);
             }
-        
+        }
     }
-   }
 }
 

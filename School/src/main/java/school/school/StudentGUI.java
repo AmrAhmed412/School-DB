@@ -282,7 +282,7 @@ public class StudentGUI extends javax.swing.JFrame {
         {
             JOptionPane.showMessageDialog(this,"Grade Field is empty.");
         }
-       else S.AddStudent(); // in case all fields have been filled, add the student
+        else S.AddStudent(); // in case all fields have been filled, add the student
     }//GEN-LAST:event_AddBtnSTDActionPerformed
 
     private void STD_ShowAllCoursesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_STD_ShowAllCoursesActionPerformed
@@ -390,7 +390,7 @@ public class StudentGUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 
-    class Student
+class Student
     {   
         Student(){};
         
@@ -403,7 +403,7 @@ public class StudentGUI extends javax.swing.JFrame {
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(new StudentGUI(),"Error has occured, please make sure all the data entered is correct");
             }
-                Table_Data_Filling(STD_DataTable);  // Showing the table after modification
+            Table_Data_Filling(STD_DataTable);  // Showing the table after modification
         }
         
         // Function to edit student grade

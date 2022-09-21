@@ -11,7 +11,7 @@ import java.sql.*;
  */
 public class School {
     
-    static Connection con=null;
+    static Connection con = null;
     static Statement s;
     public static void main(String[]args)
    {
@@ -30,10 +30,10 @@ public class School {
             s = con.createStatement();
             System.out.println("Connection established successfully");
         }
-       catch(Exception ex)
-       {
-           System.out.println(ex);
-       }
+        catch(Exception ex)
+        {
+            System.out.println(ex);
+        }
        
    }
 }
