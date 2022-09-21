@@ -12,7 +12,7 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
-import school.school.StudentGUI.Student;
+//import school.school.StudentGUI.Student;
 /**
  *
  * @author amr23
@@ -21,10 +21,14 @@ public class CoursesGUI extends javax.swing.JFrame {
 
     /**
      * Creates new form CoursesGUI
-     */public Course c= new Course();
+     */
+    public Course c = new Course();
+    public Student std = new Student();
+    public Teacher T = new Teacher();
        
     public CoursesGUI() {
         initComponents();
+        c.Table_Data_Filling(CRS_DataTable);
     }
 
     /**
@@ -42,10 +46,8 @@ public class CoursesGUI extends javax.swing.JFrame {
         CRSShowAllCoursesText = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        CRS_ID_Edit_Text = new javax.swing.JTextField();
         CRS_CourseID_Edit_Text = new javax.swing.JTextField();
         CRS_NewName_Edit_Text = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -57,6 +59,7 @@ public class CoursesGUI extends javax.swing.JFrame {
         CRS_IDText_ADD = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         CRS_ShowAllStudents = new javax.swing.JButton();
+        CRS_ShowAllCourses = new javax.swing.JButton();
 
         setTitle("Courses' Menu");
 
@@ -77,8 +80,6 @@ public class CoursesGUI extends javax.swing.JFrame {
         jLabel11.setText("Course ID:");
 
         jLabel3.setText("Course ID:");
-
-        jLabel4.setText("Course Name");
 
         jLabel5.setText("Course ID:");
 
@@ -124,6 +125,13 @@ public class CoursesGUI extends javax.swing.JFrame {
             }
         });
 
+        CRS_ShowAllCourses.setText("Show All Courses");
+        CRS_ShowAllCourses.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CRS_ShowAllCoursesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -135,27 +143,9 @@ public class CoursesGUI extends javax.swing.JFrame {
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 799, Short.MAX_VALUE)
                         .addGap(23, 23, 23))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(72, 72, 72)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel11)
-                                .addGap(18, 18, 18)
-                                .addComponent(CRSShowAllCoursesText, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addGap(18, 18, 18)
-                                .addComponent(CRS_CourseID_Del_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(15, 15, 15)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(CRS_ShowAllStudents)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(CRS_ShowAllTeachers))
-                            .addComponent(DelBtnCRS, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(72, 72, 72)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel3)
@@ -166,28 +156,43 @@ public class CoursesGUI extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(CRS_IDText_ADD, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(CRSNameText_ADD, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGap(32, 32, 32)
+                                .addComponent(AddBtnCRS, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(69, 69, 69)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jLabel5)
                                         .addGap(20, 20, 20))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel6)
+                                        .addGap(18, 18, 18)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(CRS_NewName_Edit_Text, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(CRS_CourseID_Edit_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(EditBtnCRS, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(32, 32, 32)
-                                        .addComponent(AddBtnCRS, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel11)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(CRSShowAllCoursesText, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel9)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(CRS_CourseID_Del_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(15, 15, 15)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(CRS_ShowAllStudents)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(CRS_ShowAllTeachers))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(DelBtnCRS, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel4)
-                                        .addGap(19, 19, 19))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jLabel6)
-                                .addGap(18, 18, 18)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(CRS_NewName_Edit_Text, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(CRS_CourseID_Edit_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(CRS_ID_Edit_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(EditBtnCRS, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(87, 87, 87))))
+                                        .addComponent(CRS_ShowAllCourses, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -195,22 +200,10 @@ public class CoursesGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(CRS_ID_Edit_Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel4))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(15, 15, 15)
-                                .addComponent(AddBtnCRS)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(15, 15, 15)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(CRS_CourseID_Edit_Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5)
-                            .addComponent(EditBtnCRS))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(CRS_NewName_Edit_Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6)))
+                            .addComponent(AddBtnCRS)
+                            .addComponent(EditBtnCRS)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(CRSNameText_ADD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -218,8 +211,16 @@ public class CoursesGUI extends javax.swing.JFrame {
                         .addGap(13, 13, 13)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(CRS_IDText_ADD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))))
-                .addGap(98, 98, 98)
+                            .addComponent(jLabel3)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(CRS_CourseID_Edit_Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(CRS_NewName_Edit_Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))))
+                .addGap(61, 61, 61)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CRSShowAllCoursesText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(CRS_ShowAllTeachers)
@@ -229,10 +230,11 @@ public class CoursesGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(CRS_CourseID_Del_Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(DelBtnCRS))
-                .addGap(34, 34, 34)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
-                .addGap(17, 17, 17))
+                    .addComponent(DelBtnCRS)
+                    .addComponent(CRS_ShowAllCourses, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -244,7 +246,8 @@ public class CoursesGUI extends javax.swing.JFrame {
         {
             JOptionPane.showMessageDialog(this,"Course ID Field is empty.");
         }
-        else c.DeleteCourse();     // Deleting that Course's course data
+        else c.DeleteCourse(CRS_CourseID_Del_Text.getText(), CRS_DataTable);
+        // Deleting that Course's data
     }//GEN-LAST:event_DelBtnCRSActionPerformed
 
     private void CRS_ShowAllTeachersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CRS_ShowAllTeachersActionPerformed
@@ -254,16 +257,12 @@ public class CoursesGUI extends javax.swing.JFrame {
         {
             JOptionPane.showMessageDialog(this,"Course ID Field is empty.");
         }
-        else c.Table_Data_Filling(CRS_DataTable," Teacher Where CourseID ="+CRSShowAllCoursesText.getText()); // Filling the table with the Course's courses
+        else T.Table_Data_Filling(CRS_DataTable," Where CourseID ="+CRSShowAllCoursesText.getText()); // Filling the table with the Course's courses
     }//GEN-LAST:event_CRS_ShowAllTeachersActionPerformed
 
     private void EditBtnCRSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditBtnCRSActionPerformed
         // Checking if there is an empty text box
-        if (CRS_ID_Edit_Text.getText().equals(""))
-        {
-            JOptionPane.showMessageDialog(this,"Course ID Field is empty.");
-        }
-        else if (CRS_CourseID_Edit_Text.getText().equals(""))
+        if (CRS_CourseID_Edit_Text.getText().equals(""))
         {
             JOptionPane.showMessageDialog(this,"Course ID Field is empty.");
         }
@@ -271,7 +270,8 @@ public class CoursesGUI extends javax.swing.JFrame {
         {
             JOptionPane.showMessageDialog(this,"New Name Field is empty.");
         }
-        else c.EditCourse();       // Editing that Course's course grade
+        else c.EditCourse(CRS_NewName_Edit_Text.getText(), CRS_CourseID_Edit_Text.getText(), CRS_DataTable);
+        // Editing that Course's course grade
     }//GEN-LAST:event_EditBtnCRSActionPerformed
 
     private void AddBtnCRSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddBtnCRSActionPerformed
@@ -285,7 +285,8 @@ public class CoursesGUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this,"Course ID Field is empty.");
         }
         
-        else c.AddCourse(); // in case all fields have been filled, add the Course
+        else c.AddCourse(CRS_IDText_ADD.getText(), CRSNameText_ADD.getText(), CRS_DataTable);
+        // in case all fields have been filled, add the Course
     }//GEN-LAST:event_AddBtnCRSActionPerformed
 
     private void CRS_ShowAllStudentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CRS_ShowAllStudentsActionPerformed
@@ -293,8 +294,13 @@ public class CoursesGUI extends javax.swing.JFrame {
         {
             JOptionPane.showMessageDialog(this,"Course ID Field is empty.");
         }
-        else c.Table_Data_Filling(CRS_DataTable," Student Where CourseID ="+CRSShowAllCoursesText.getText()); // Filling the table with the Course's courses 
+        else std.Table_Data_Filling(CRS_DataTable," Where CourseID ="+CRSShowAllCoursesText.getText()); // Filling the table with the Course's courses 
     }//GEN-LAST:event_CRS_ShowAllStudentsActionPerformed
+
+    private void CRS_ShowAllCoursesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CRS_ShowAllCoursesActionPerformed
+        // TODO add your handling code here:
+        c.Table_Data_Filling(CRS_DataTable);
+    }//GEN-LAST:event_CRS_ShowAllCoursesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -339,8 +345,8 @@ public class CoursesGUI extends javax.swing.JFrame {
     private javax.swing.JTextField CRS_CourseID_Edit_Text;
     private javax.swing.JTable CRS_DataTable;
     private javax.swing.JTextField CRS_IDText_ADD;
-    private javax.swing.JTextField CRS_ID_Edit_Text;
     private javax.swing.JTextField CRS_NewName_Edit_Text;
+    private javax.swing.JButton CRS_ShowAllCourses;
     private javax.swing.JButton CRS_ShowAllStudents;
     private javax.swing.JButton CRS_ShowAllTeachers;
     private javax.swing.JButton DelBtnCRS;
@@ -348,89 +354,53 @@ public class CoursesGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 
-
-class Course
-    {   
-        Course(){};
-        
-        // Function to add Courses
-        public void AddCourse()
-        {
-            try {
-                int count =  School.s.executeUpdate("insert into Course values ("+ CRS_IDText_ADD.getText() +",'"+CRSNameText_ADD.getText()+"')");
-                // The query that adds a Course to the School database
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(new CoursesGUI(),"Error has occured, please make sure all the data entered is correct");
-            }
-            Table_Data_Filling(CRS_DataTable);  // Showing the table after modification
-        }
-        
-        // Function to edit Course grade
-        public void EditCourse()
-        {
-            try {
-                int count =  School.s.executeUpdate("Update Course Set CourseName = '"+CRS_NewName_Edit_Text.getText()+"' Where Code = "+ CRS_ID_Edit_Text.getText());
-                // The query that edits a Course's grade
-
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(new CoursesGUI(),"Error has occured, please make sure all the data entered is correct");
-            }
-                Table_Data_Filling(CRS_DataTable);  // Showing the table after modification
-        }
-        
-        // Function to delete Course
-        public void DeleteCourse()
-        {
-            try {
-                int count =  School.s.executeUpdate("Delete From Course Where Code = "+ CRS_CourseID_Del_Text.getText() );
-                // The query that deletes a Course from the database
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(new CoursesGUI(),"Error has occured, please make sure all the data entered is correct");
-            }
-                Table_Data_Filling(CRS_DataTable);  // Showing the table after modification
-        }
-        
-        // Overloading the function with empty strings to avoid the where clause
-        public void Table_Data_Filling(JTable a)
-        {
-            Table_Data_Filling(a, " Course ");
-        }
-        
-        public void Table_Data_Filling(JTable a, String str)
-        {
-            // Removing top empty rows from the table
-            DefaultTableModel dtm = (DefaultTableModel) a.getModel();
-            dtm.setRowCount(0);
-            try {
-                // Executing the query and filling the table
-                ResultSet rs = School.s.executeQuery("Select * from"+ str);
-                ResultSetMetaData rsmd = rs.getMetaData();
-                DefaultTableModel model = (DefaultTableModel) a.getModel();
-                int cols = rsmd.getColumnCount();
-                String[] colName = new String [cols];
-                for(int i=0; i<cols; i++)
-                {
-                    colName[i] = rsmd.getColumnName(i+1);
-                }
-                model.setColumnIdentifiers(colName);
-                String name,ID;
-                while(rs.next()) {
-                    ID=rs.getString(1);
-                    name=rs.getString(2);
-                    String[] row= {ID, name};
-                    model.addRow(row);      // adding a row to the table
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(CoursesGUI.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }
 }
 
+class Course extends TableFilling
+{   
+    Course(){};
+
+    // Function to add Courses
+    public void AddCourse(String CRS_IDText_ADD, String CRSNameText_ADD, JTable CRS_DataTable)
+    {
+        try {
+            int count =  School.s.executeUpdate("insert into Course values ("+ CRS_IDText_ADD +",'"+CRSNameText_ADD+"')");
+            // The query that adds a Course to the School database
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(new CoursesGUI(),"Error has occured, please make sure all the data entered is correct");
+        }
+        Table_Data_Filling(CRS_DataTable);  // Showing the table after modification
+    }
+
+    // Function to edit Course grade
+    public void EditCourse(String CRS_NewName_Edit_Text, String CRS_CourseID_Edit_Text, JTable CRS_DataTable)
+    {
+        try {
+            int count =  School.s.executeUpdate("Update Course Set CourseName = '"+CRS_NewName_Edit_Text+"' Where Code = "+ CRS_CourseID_Edit_Text);
+            // The query that edits a Course's grade
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(new CoursesGUI(),"Error has occured, please make sure all the data entered is correct");
+        }
+            Table_Data_Filling(CRS_DataTable);  // Showing the table after modification
+    }
+
+    // Function to delete Course
+    public void DeleteCourse(String CRS_CourseID_Del_Text, JTable CRS_DataTable)
+    {
+        try {
+            int count =  School.s.executeUpdate("Delete From Course Where Code = "+ CRS_CourseID_Del_Text);
+            // The query that deletes a Course from the database
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(new CoursesGUI(),"Error has occured, please make sure all the data entered is correct");
+        }
+            Table_Data_Filling(CRS_DataTable);  // Showing the table after modification
+    }
+
+}

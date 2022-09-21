@@ -4,6 +4,10 @@
  */
 package school.school;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -34,4 +38,51 @@ public class School {
         }
        
    }
+}
+
+
+class TableFilling {
+    // Overloading the function with empty strings to avoid the where clause
+    public void Table_Data_Filling(JTable a)
+    {
+        Table_Data_Filling(a, "");
+    }
+
+    public void Table_Data_Filling(JTable a, String str)
+    {
+        // Removing top empty rows from the table
+        DefaultTableModel dtm = (DefaultTableModel) a.getModel();
+        dtm.setRowCount(0);
+        try {
+            // Executing the query and filling the table
+            ResultSet rs = School.s.executeQuery("Select * from "+ this.getClass().getSimpleName() + str);
+            ResultSetMetaData rsmd = rs.getMetaData();
+            DefaultTableModel model = (DefaultTableModel) a.getModel();
+            int cols = rsmd.getColumnCount();
+            String[] colName = new String [cols];
+            for(int i=0; i<cols; i++)
+            {
+                colName[i] = rsmd.getColumnName(i+1);
+            }
+            model.setColumnIdentifiers(colName);
+            String name, grade, ID, CourseID;
+            while(rs.next()) {
+                ID=rs.getString(1);
+                name=rs.getString(2);
+                try {
+                    grade=rs.getString(3);
+                    CourseID=rs.getString(4);
+                    String[] row= {ID, name, grade,CourseID};
+                    model.addRow(row); // adding a row to the table
+                }
+                catch (Exception e)
+                {
+                    String[] row= {ID, name};
+                    model.addRow(row); // adding a row to the table
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CoursesGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
