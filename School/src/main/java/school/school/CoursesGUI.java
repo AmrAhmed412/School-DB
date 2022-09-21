@@ -3,7 +3,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package school.school;
-
+import javax.swing.*;
+import javax.swing.table.TableModel;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+import school.school.StudentGUI.Student;
 /**
  *
  * @author amr23
@@ -12,7 +21,8 @@ public class CoursesGUI extends javax.swing.JFrame {
 
     /**
      * Creates new form CoursesGUI
-     */
+     */public Course c= new Course();
+       
     public CoursesGUI() {
         initComponents();
     }
@@ -26,21 +36,265 @@ public class CoursesGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        CRS_CourseID_Del_Text = new javax.swing.JTextField();
+        DelBtnCRS = new javax.swing.JButton();
+        CRS_ShowAllTeachers = new javax.swing.JButton();
+        CRSShowAllCoursesText = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        CRS_ID_Edit_Text = new javax.swing.JTextField();
+        CRS_CourseID_Edit_Text = new javax.swing.JTextField();
+        CRS_NewName_Edit_Text = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        CRS_DataTable = new javax.swing.JTable();
+        EditBtnCRS = new javax.swing.JButton();
+        AddBtnCRS = new javax.swing.JButton();
+        CRSNameText_ADD = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        CRS_IDText_ADD = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        CRS_ShowAllStudents = new javax.swing.JButton();
+
         setTitle("Courses' Menu");
+
+        DelBtnCRS.setText("Delete");
+        DelBtnCRS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DelBtnCRSActionPerformed(evt);
+            }
+        });
+
+        CRS_ShowAllTeachers.setText("Show All Teachers");
+        CRS_ShowAllTeachers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CRS_ShowAllTeachersActionPerformed(evt);
+            }
+        });
+
+        jLabel11.setText("Course ID:");
+
+        jLabel3.setText("Course ID:");
+
+        jLabel4.setText("Course Name");
+
+        jLabel5.setText("Course ID:");
+
+        jLabel6.setText("New Course Name");
+
+        CRS_DataTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(CRS_DataTable);
+
+        EditBtnCRS.setText("Edit");
+        EditBtnCRS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditBtnCRSActionPerformed(evt);
+            }
+        });
+
+        AddBtnCRS.setText("Add");
+        AddBtnCRS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddBtnCRSActionPerformed(evt);
+            }
+        });
+
+        CRSNameText_ADD.setName(""); // NOI18N
+
+        jLabel2.setText("Course Name:");
+
+        jLabel9.setText("Course ID:");
+
+        CRS_ShowAllStudents.setText("Show All Students");
+        CRS_ShowAllStudents.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CRS_ShowAllStudentsActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 799, Short.MAX_VALUE)
+                        .addGap(23, 23, 23))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addGap(18, 18, 18)
+                                .addComponent(CRSShowAllCoursesText, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addGap(18, 18, 18)
+                                .addComponent(CRS_CourseID_Del_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(15, 15, 15)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(CRS_ShowAllStudents)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(CRS_ShowAllTeachers))
+                            .addComponent(DelBtnCRS, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(72, 72, 72)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addGap(32, 32, 32))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(CRS_IDText_ADD, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(CRSNameText_ADD, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel5)
+                                        .addGap(20, 20, 20))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(32, 32, 32)
+                                        .addComponent(AddBtnCRS, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel4)
+                                        .addGap(19, 19, 19))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel6)
+                                .addGap(18, 18, 18)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(CRS_NewName_Edit_Text, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CRS_CourseID_Edit_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CRS_ID_Edit_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(EditBtnCRS, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(87, 87, 87))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(CRS_ID_Edit_Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel4))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(15, 15, 15)
+                                .addComponent(AddBtnCRS)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(CRS_CourseID_Edit_Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5)
+                            .addComponent(EditBtnCRS))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(CRS_NewName_Edit_Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(CRSNameText_ADD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addGap(13, 13, 13)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(CRS_IDText_ADD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))))
+                .addGap(98, 98, 98)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CRSShowAllCoursesText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CRS_ShowAllTeachers)
+                    .addComponent(jLabel11)
+                    .addComponent(CRS_ShowAllStudents))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(CRS_CourseID_Del_Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(DelBtnCRS))
+                .addGap(34, 34, 34)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
+                .addGap(17, 17, 17))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void DelBtnCRSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DelBtnCRSActionPerformed
+        // Checking if there is an empty text box
+        if (CRS_CourseID_Del_Text.getText().equals(""))
+        {
+            JOptionPane.showMessageDialog(this,"Course ID Field is empty.");
+        }
+        else c.DeleteCourse();     // Deleting that Course's course data
+    }//GEN-LAST:event_DelBtnCRSActionPerformed
+
+    private void CRS_ShowAllTeachersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CRS_ShowAllTeachersActionPerformed
+        // TODO add your handling code here:
+        // Checking if there is an empty text box
+        if (CRSShowAllCoursesText.getText().equals(""))
+        {
+            JOptionPane.showMessageDialog(this,"Course ID Field is empty.");
+        }
+        else c.Table_Data_Filling(CRS_DataTable," Teacher Where CourseID ="+CRSShowAllCoursesText.getText()); // Filling the table with the Course's courses
+    }//GEN-LAST:event_CRS_ShowAllTeachersActionPerformed
+
+    private void EditBtnCRSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditBtnCRSActionPerformed
+        // Checking if there is an empty text box
+        if (CRS_ID_Edit_Text.getText().equals(""))
+        {
+            JOptionPane.showMessageDialog(this,"Course ID Field is empty.");
+        }
+        else if (CRS_CourseID_Edit_Text.getText().equals(""))
+        {
+            JOptionPane.showMessageDialog(this,"Course ID Field is empty.");
+        }
+        else if (CRS_NewName_Edit_Text.getText().equals(""))
+        {
+            JOptionPane.showMessageDialog(this,"New Name Field is empty.");
+        }
+        else c.EditCourse();       // Editing that Course's course grade
+    }//GEN-LAST:event_EditBtnCRSActionPerformed
+
+    private void AddBtnCRSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddBtnCRSActionPerformed
+        // Checking if there is an empty text box
+        if (CRSNameText_ADD.getText().equals(""))
+        {
+            JOptionPane.showMessageDialog(this,"Course Name Field is empty.");
+        }
+        else if (CRS_IDText_ADD.getText().equals(""))
+        {
+            JOptionPane.showMessageDialog(this,"Course ID Field is empty.");
+        }
+        
+        else c.AddCourse(); // in case all fields have been filled, add the Course
+    }//GEN-LAST:event_AddBtnCRSActionPerformed
+
+    private void CRS_ShowAllStudentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CRS_ShowAllStudentsActionPerformed
+      if (CRSShowAllCoursesText.getText().equals(""))
+        {
+            JOptionPane.showMessageDialog(this,"Course ID Field is empty.");
+        }
+        else c.Table_Data_Filling(CRS_DataTable," Student Where CourseID ="+CRSShowAllCoursesText.getText()); // Filling the table with the Course's courses 
+    }//GEN-LAST:event_CRS_ShowAllStudentsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +332,105 @@ public class CoursesGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AddBtnCRS;
+    private javax.swing.JTextField CRSNameText_ADD;
+    private javax.swing.JTextField CRSShowAllCoursesText;
+    private javax.swing.JTextField CRS_CourseID_Del_Text;
+    private javax.swing.JTextField CRS_CourseID_Edit_Text;
+    private javax.swing.JTable CRS_DataTable;
+    private javax.swing.JTextField CRS_IDText_ADD;
+    private javax.swing.JTextField CRS_ID_Edit_Text;
+    private javax.swing.JTextField CRS_NewName_Edit_Text;
+    private javax.swing.JButton CRS_ShowAllStudents;
+    private javax.swing.JButton CRS_ShowAllTeachers;
+    private javax.swing.JButton DelBtnCRS;
+    private javax.swing.JButton EditBtnCRS;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
+
+
+class Course
+    {   
+        Course(){};
+        
+        // Function to add Courses
+        public void AddCourse()
+        {
+            try {
+                int count =  School.s.executeUpdate("insert into Course values ("+ CRS_IDText_ADD.getText() +",'"+CRSNameText_ADD.getText()+"')");
+                // The query that adds a Course to the School database
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(new CoursesGUI(),"Error has occured, please make sure all the data entered is correct");
+            }
+            Table_Data_Filling(CRS_DataTable);  // Showing the table after modification
+        }
+        
+        // Function to edit Course grade
+        public void EditCourse()
+        {
+            try {
+                int count =  School.s.executeUpdate("Update Course Set CourseName = '"+CRS_NewName_Edit_Text.getText()+"' Where Code = "+ CRS_ID_Edit_Text.getText());
+                // The query that edits a Course's grade
+
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(new CoursesGUI(),"Error has occured, please make sure all the data entered is correct");
+            }
+                Table_Data_Filling(CRS_DataTable);  // Showing the table after modification
+        }
+        
+        // Function to delete Course
+        public void DeleteCourse()
+        {
+            try {
+                int count =  School.s.executeUpdate("Delete From Course Where Code = "+ CRS_CourseID_Del_Text.getText() );
+                // The query that deletes a Course from the database
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(new CoursesGUI(),"Error has occured, please make sure all the data entered is correct");
+            }
+                Table_Data_Filling(CRS_DataTable);  // Showing the table after modification
+        }
+        
+        // Overloading the function with empty strings to avoid the where clause
+        public void Table_Data_Filling(JTable a)
+        {
+            Table_Data_Filling(a, " Course ");
+        }
+        
+        public void Table_Data_Filling(JTable a, String str)
+        {
+            // Removing top empty rows from the table
+            DefaultTableModel dtm = (DefaultTableModel) a.getModel();
+            dtm.setRowCount(0);
+            try {
+                // Executing the query and filling the table
+                ResultSet rs = School.s.executeQuery("Select * from"+ str);
+                ResultSetMetaData rsmd = rs.getMetaData();
+                DefaultTableModel model = (DefaultTableModel) a.getModel();
+                int cols = rsmd.getColumnCount();
+                String[] colName = new String [cols];
+                for(int i=0; i<cols; i++)
+                {
+                    colName[i] = rsmd.getColumnName(i+1);
+                }
+                model.setColumnIdentifiers(colName);
+                String name,ID;
+                while(rs.next()) {
+                    ID=rs.getString(1);
+                    name=rs.getString(2);
+                    String[] row= {ID, name};
+                    model.addRow(row);      // adding a row to the table
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(CoursesGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
 }
+

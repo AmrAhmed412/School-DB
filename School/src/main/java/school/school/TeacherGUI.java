@@ -275,7 +275,7 @@ public class TeacherGUI extends javax.swing.JFrame {
         {
             JOptionPane.showMessageDialog(this,"Teacher ID Field is empty.");
         }
-        else T.Table_Data_Filling(TCH_DataTable," Where ID ="+TCHShowAllCoursesText.getText()); // Filling the table with the teacher's courses
+        else T.Table_Data_Filling(TCH_DataTable," Teacher Where ID ="+TCHShowAllCoursesText.getText()); // Filling the table with the teacher's courses
     }//GEN-LAST:event_TCH_ShowAllCoursesActionPerformed
 
     private void EditBtnTCHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditBtnTCHActionPerformed
@@ -430,7 +430,7 @@ class Teacher
         // Overloading the function with empty strings to avoid the where clause
         public void Table_Data_Filling(JTable a)
         {
-            Table_Data_Filling(a, "");
+            Table_Data_Filling(a, " Teacher ");
         }
         
         public void Table_Data_Filling(JTable a, String str)
@@ -440,7 +440,7 @@ class Teacher
             dtm.setRowCount(0);
             try {
                 // Executing the query and filling the table
-                ResultSet rs = School.s.executeQuery("Select * from Teacher"+ str);
+                ResultSet rs = School.s.executeQuery("Select * from"+ str);
                 ResultSetMetaData rsmd = rs.getMetaData();
                 DefaultTableModel model = (DefaultTableModel) a.getModel();
                 int cols = rsmd.getColumnCount();
@@ -450,13 +450,13 @@ class Teacher
                     colName[i] = rsmd.getColumnName(i+1);
                 }
                 model.setColumnIdentifiers(colName);
-                String name, grade, ID, CourseID;
+                String name, Salary, ID, CourseID;
                 while(rs.next()) {
                     ID=rs.getString(1);
                     name=rs.getString(2);
-                    grade=rs.getString(3);
+                    Salary=rs.getString(3);
                     CourseID=rs.getString(4);
-                    String[] row= {ID, name, grade,CourseID};
+                    String[] row= {ID, name, Salary,CourseID};
                     model.addRow(row);      // adding a row to the table
                 }
             } catch (SQLException ex) {

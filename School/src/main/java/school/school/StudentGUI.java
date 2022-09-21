@@ -292,7 +292,7 @@ public class StudentGUI extends javax.swing.JFrame {
         {
             JOptionPane.showMessageDialog(this,"Student ID Field is empty.");
         }
-        else S.Table_Data_Filling(STD_DataTable," Where ID ="+STDShowAllCoursesText.getText()); // Filling the table with the student's courses
+        else S.Table_Data_Filling(STD_DataTable," Student Where ID ="+STDShowAllCoursesText.getText()); // Filling the table with the student's courses
     }//GEN-LAST:event_STD_ShowAllCoursesActionPerformed
 
     private void DelBtnSTDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DelBtnSTDActionPerformed
@@ -434,7 +434,7 @@ class Student
         // Overloading the function with empty strings to avoid the where clause
         public void Table_Data_Filling(JTable a)
         {
-            Table_Data_Filling(a, "");
+            Table_Data_Filling(a, " Student");
         }
         
         public void Table_Data_Filling(JTable a, String str)
@@ -444,7 +444,7 @@ class Student
             dtm.setRowCount(0);
             try {
                 // Executing the query and filling the table
-                ResultSet rs = School.s.executeQuery("Select * from Student"+ str);
+                ResultSet rs = School.s.executeQuery("Select * from"+ str);
                 ResultSetMetaData rsmd = rs.getMetaData();
                 DefaultTableModel model = (DefaultTableModel) a.getModel();
                 int cols = rsmd.getColumnCount();
