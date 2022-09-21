@@ -3,7 +3,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package school.school;
-
+import javax.swing.*;
+import javax.swing.table.TableModel;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author amr23
@@ -12,7 +20,7 @@ public class TeacherGUI extends javax.swing.JFrame {
 
     /**
      * Creates new form TeacherGUI
-     */
+     */Teacher T=  new Teacher();
     public TeacherGUI() {
         initComponents();
     }
@@ -26,21 +34,286 @@ public class TeacherGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel6 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        TCH_DataTable = new javax.swing.JTable();
+        TCH_ID_Del_Text = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        TCH_CourseID_Del_Text = new javax.swing.JTextField();
+        DelBtnTCH = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        TCH_Salary_ADD = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        TCH_ShowAllCourses = new javax.swing.JButton();
+        EditBtnTCH = new javax.swing.JButton();
+        TCHShowAllCoursesText = new javax.swing.JTextField();
+        AddBtnTCH = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        TCHNameText_ADD = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        TCH_IDText_ADD = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        TCH_ID_Edit_Text = new javax.swing.JTextField();
+        TCH_CourseID_Edit_Text = new javax.swing.JTextField();
+        TCH_Salary_Edit_Text = new javax.swing.JTextField();
+        TCH_CourseIDText_ADD = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+
         setTitle("Teacher's Menu");
+
+        jLabel6.setText("New Salary");
+
+        TCH_DataTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(TCH_DataTable);
+
+        jLabel8.setText("Teacher ID:");
+
+        jLabel9.setText("Course ID:");
+
+        DelBtnTCH.setText("Delete");
+        DelBtnTCH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DelBtnTCHActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setText("Salary");
+
+        jLabel1.setText("Course");
+
+        TCH_ShowAllCourses.setText("Show All Courses");
+        TCH_ShowAllCourses.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TCH_ShowAllCoursesActionPerformed(evt);
+            }
+        });
+
+        EditBtnTCH.setText("Edit");
+        EditBtnTCH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditBtnTCHActionPerformed(evt);
+            }
+        });
+
+        AddBtnTCH.setText("Add");
+        AddBtnTCH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddBtnTCHActionPerformed(evt);
+            }
+        });
+
+        jLabel11.setText("Teachert ID:");
+
+        TCHNameText_ADD.setName(""); // NOI18N
+
+        jLabel2.setText("Teacher Name:");
+
+        jLabel3.setText("Teacher ID:");
+
+        TCH_CourseIDText_ADD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TCH_CourseIDText_ADDActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Teacher ID:");
+
+        jLabel5.setText("Course ID:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 732, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane2)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 47, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel3)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(TCH_IDText_ADD, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(TCHNameText_ADD, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(TCH_CourseIDText_ADD, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(TCH_Salary_ADD, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(34, 34, 34)
+                                .addComponent(AddBtnTCH, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(130, 130, 130)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addComponent(jLabel5)
+                                                .addGap(20, 20, 20))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addComponent(jLabel4)
+                                                .addGap(19, 19, 19))))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel6)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(TCH_Salary_Edit_Text, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(TCH_CourseID_Edit_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(TCH_ID_Edit_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(EditBtnTCH, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(36, 36, 36)))
+                        .addGap(23, 23, 23))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addGap(13, 13, 13)
+                        .addComponent(TCH_ID_Del_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(TCH_CourseID_Del_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(DelBtnTCH, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addGap(18, 18, 18)
+                        .addComponent(TCHShowAllCoursesText, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(23, 23, 23)
+                        .addComponent(TCH_ShowAllCourses, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(TCH_ID_Edit_Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(TCH_CourseID_Edit_Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5)
+                            .addComponent(EditBtnTCH))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(TCH_Salary_Edit_Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(TCHNameText_ADD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addGap(13, 13, 13)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(TCH_IDText_ADD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)
+                            .addComponent(AddBtnTCH))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(TCH_CourseIDText_ADD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10)
+                            .addComponent(TCH_Salary_ADD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(63, 63, 63)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TCHShowAllCoursesText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TCH_ShowAllCourses)
+                    .addComponent(jLabel11))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TCH_ID_Del_Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel9)
+                    .addComponent(TCH_CourseID_Del_Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(DelBtnTCH))
+                .addGap(60, 60, 60)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
+                .addGap(17, 17, 17))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void DelBtnTCHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DelBtnTCHActionPerformed
+        if (TCH_ID_Del_Text.getText().equals(""))
+        {
+            JOptionPane.showMessageDialog(this,"Teacher ID Field is empty.");
+        }
+        else if (TCH_CourseID_Del_Text.getText().equals(""))
+        {
+            JOptionPane.showMessageDialog(this,"Course ID Field is empty.");
+        }
+        else T.DeleteTeacher();
+    }//GEN-LAST:event_DelBtnTCHActionPerformed
+
+    private void TCH_ShowAllCoursesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TCH_ShowAllCoursesActionPerformed
+        // TODO add your handling code here:
+        if (TCHShowAllCoursesText.getText().equals(""))
+        {
+            JOptionPane.showMessageDialog(this,"Teacher ID Field is empty.");
+        }
+        else T.Table_Data_Filling(TCH_DataTable," Where ID ="+TCHShowAllCoursesText.getText());
+    }//GEN-LAST:event_TCH_ShowAllCoursesActionPerformed
+
+    private void EditBtnTCHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditBtnTCHActionPerformed
+        if (TCH_ID_Edit_Text.getText().equals(""))
+        {
+            JOptionPane.showMessageDialog(this,"Teacher ID Field is empty.");
+        }
+        else if (TCH_CourseID_Edit_Text.getText().equals(""))
+        {
+            JOptionPane.showMessageDialog(this,"Course ID Field is empty.");
+        }
+        else if (TCH_Salary_Edit_Text.getText().equals(""))
+        {
+            JOptionPane.showMessageDialog(this,"Grade Field is empty.");
+        }
+        else T.EditTeacher();
+    }//GEN-LAST:event_EditBtnTCHActionPerformed
+
+    private void AddBtnTCHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddBtnTCHActionPerformed
+        if (TCHNameText_ADD.getText().equals(""))
+        {
+            JOptionPane.showMessageDialog(this,"Teacher Name Field is empty.");
+        }
+        else if (TCH_IDText_ADD.getText().equals(""))
+        {
+            JOptionPane.showMessageDialog(this,"Teacher ID Field is empty.");
+        }
+        else if (TCH_CourseIDText_ADD.getText().equals(""))
+        {
+            JOptionPane.showMessageDialog(this,"Course ID Field is empty.");
+        }
+        else if (TCH_Salary_ADD.getText().equals(""))
+        {
+            JOptionPane.showMessageDialog(this,"Grade Field is empty.");
+        }
+        else T.AddTeacher();
+    }//GEN-LAST:event_AddBtnTCHActionPerformed
+
+    private void TCH_CourseIDText_ADDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TCH_CourseIDText_ADDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TCH_CourseIDText_ADDActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +351,103 @@ public class TeacherGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AddBtnTCH;
+    private javax.swing.JButton DelBtnTCH;
+    private javax.swing.JButton EditBtnTCH;
+    private javax.swing.JTextField TCHNameText_ADD;
+    private javax.swing.JTextField TCHShowAllCoursesText;
+    private javax.swing.JTextField TCH_CourseIDText_ADD;
+    private javax.swing.JTextField TCH_CourseID_Del_Text;
+    private javax.swing.JTextField TCH_CourseID_Edit_Text;
+    private javax.swing.JTable TCH_DataTable;
+    private javax.swing.JTextField TCH_IDText_ADD;
+    private javax.swing.JTextField TCH_ID_Del_Text;
+    private javax.swing.JTextField TCH_ID_Edit_Text;
+    private javax.swing.JTextField TCH_Salary_ADD;
+    private javax.swing.JTextField TCH_Salary_Edit_Text;
+    private javax.swing.JButton TCH_ShowAllCourses;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
+
+
+class Teacher
+    {   
+        Teacher(){};
+         public void AddTeacher()
+         {
+            
+             try {
+          int count =  School.s.executeUpdate("insert into Teacher values ("+ TCH_IDText_ADD.getText() +",'"+TCHNameText_ADD.getText()+"','"+TCH_Salary_ADD.getText()+"',"+TCH_CourseIDText_ADD.getText()+")");
+            
+        } catch (Exception ex) {
+           JOptionPane.showMessageDialog(new TeacherGUI(),"Error has occured, please make sure all the data entered is correct");
+        }
+          Table_Data_Filling(TCH_DataTable);  
+        }
+         public void EditTeacher()
+         {
+             try {
+          int count =  School.s.executeUpdate("Update Teacher Set Salary = '"+TCH_Salary_Edit_Text.getText()+"' Where ID = "+ TCH_ID_Edit_Text.getText() +"AND CourseID = '"+TCH_CourseID_Edit_Text.getText()+"'");
+            
+        } catch (Exception ex) {
+           JOptionPane.showMessageDialog(new TeacherGUI(),"Error has occured, please make sure all the data entered is correct");
+        }
+          Table_Data_Filling(TCH_DataTable);  
+         }
+          public void DeleteTeacher()
+         {
+             try {
+          int count =  School.s.executeUpdate("Delete From Teacher Where ID = "+ TCH_ID_Del_Text.getText() +"AND CourseID = '"+TCH_CourseID_Del_Text.getText()+"'");
+            
+        } catch (Exception ex) {
+           JOptionPane.showMessageDialog(new TeacherGUI(),"Error has occured, please make sure all the data entered is correct");
+        }
+          Table_Data_Filling(TCH_DataTable);  
+         }
+         public void Table_Data_Filling(JTable a)
+         {
+             Table_Data_Filling(a, "");
+         }
+         public void Table_Data_Filling(JTable a, String str)
+         {
+             DefaultTableModel dtm = (DefaultTableModel) a.getModel();
+             dtm.setRowCount(0);
+            try {
+                ResultSet rs = School.s.executeQuery("Select * from Teacher"+ str);
+                ResultSetMetaData rsmd = rs.getMetaData();
+                DefaultTableModel model = (DefaultTableModel) a.getModel();
+                int cols = rsmd.getColumnCount();
+                String[] colName = new String [cols];
+                for(int i=0; i<cols; i++)
+                {
+                    colName[i] = rsmd.getColumnName(i+1);
+                }
+                model.setColumnIdentifiers(colName);
+                String name, grade, ID, CourseID;
+                while(rs.next()) {
+                    ID=rs.getString(1);
+                    name=rs.getString(2);
+                    grade=rs.getString(3);
+                    CourseID=rs.getString(4);
+                    String[] row= {ID, name, grade,CourseID};
+                    model.addRow(row);
+                    
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(TeacherGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+    }
+   }
 }
+

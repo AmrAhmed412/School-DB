@@ -384,37 +384,7 @@ public class StudentGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
-public static TableModel resultSetToTableModel(ResultSet rs) {
-        try {
-            ResultSetMetaData metaData = rs.getMetaData();
-            int numberOfColumns = metaData.getColumnCount();
-            Vector columnNames = new Vector();
 
-            // Get the column names
-            for (int column = 0; column < numberOfColumns; column++) {
-                columnNames.addElement(metaData.getColumnLabel(column + 1));
-            }
-
-            // Get all rows.
-            Vector rows = new Vector();
-
-            while (rs.next()) {
-                Vector newRow = new Vector();
-
-                for (int i = 1; i <= numberOfColumns; i++) {
-                    newRow.addElement(rs.getObject(i));
-                }
-
-                rows.addElement(newRow);
-            }
-
-            return new DefaultTableModel(rows, columnNames);
-        } catch (Exception e) {
-            e.printStackTrace();
-
-            return null;
-        }
-    }
     class Student
     {   
         Student(){};
@@ -455,7 +425,7 @@ public static TableModel resultSetToTableModel(ResultSet rs) {
          }
          public void Table_Data_Filling(JTable a, String str)
          {
-             DefaultTableModel dtm = (DefaultTableModel) STD_DataTable.getModel();
+             DefaultTableModel dtm = (DefaultTableModel) a.getModel();
              dtm.setRowCount(0);
             try {
                 ResultSet rs = School.s.executeQuery("Select * from Student"+ str);
