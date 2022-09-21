@@ -28,6 +28,7 @@ public class CoursesGUI extends javax.swing.JFrame {
        
     public CoursesGUI() {
         initComponents();
+        // Filling the table with all courses
         c.Table_Data_Filling(CRS_DataTable);
     }
 
@@ -257,7 +258,7 @@ public class CoursesGUI extends javax.swing.JFrame {
         {
             JOptionPane.showMessageDialog(this,"Course ID Field is empty.");
         }
-        else T.Table_Data_Filling(CRS_DataTable," Where CourseID ="+CRSShowAllCoursesText.getText()); // Filling the table with the Course's courses
+        else T.Table_Data_Filling(CRS_DataTable," Where CourseID ="+CRSShowAllCoursesText.getText()); // Filling the table with the Course's teachers
     }//GEN-LAST:event_CRS_ShowAllTeachersActionPerformed
 
     private void EditBtnCRSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditBtnCRSActionPerformed
@@ -271,7 +272,7 @@ public class CoursesGUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this,"New Name Field is empty.");
         }
         else c.EditCourse(CRS_NewName_Edit_Text.getText(), CRS_CourseID_Edit_Text.getText(), CRS_DataTable);
-        // Editing that Course's course grade
+        // Editing that Course's name
     }//GEN-LAST:event_EditBtnCRSActionPerformed
 
     private void AddBtnCRSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddBtnCRSActionPerformed
@@ -290,15 +291,17 @@ public class CoursesGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_AddBtnCRSActionPerformed
 
     private void CRS_ShowAllStudentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CRS_ShowAllStudentsActionPerformed
-      if (CRSShowAllCoursesText.getText().equals(""))
+        // Checking if there is an empty text box
+        if (CRSShowAllCoursesText.getText().equals(""))
         {
             JOptionPane.showMessageDialog(this,"Course ID Field is empty.");
         }
-        else std.Table_Data_Filling(CRS_DataTable," Where CourseID ="+CRSShowAllCoursesText.getText()); // Filling the table with the Course's courses 
+        else std.Table_Data_Filling(CRS_DataTable," Where CourseID ="+CRSShowAllCoursesText.getText()); // Filling the table with the Course's students 
     }//GEN-LAST:event_CRS_ShowAllStudentsActionPerformed
 
     private void CRS_ShowAllCoursesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CRS_ShowAllCoursesActionPerformed
         // TODO add your handling code here:
+        // Filling the table with all courses
         c.Table_Data_Filling(CRS_DataTable);
     }//GEN-LAST:event_CRS_ShowAllCoursesActionPerformed
 
@@ -378,12 +381,12 @@ class Course extends TableFilling
         Table_Data_Filling(CRS_DataTable);  // Showing the table after modification
     }
 
-    // Function to edit Course grade
+    // Function to edit Course name
     public void EditCourse(String CRS_NewName_Edit_Text, String CRS_CourseID_Edit_Text, JTable CRS_DataTable)
     {
         try {
             int count =  School.s.executeUpdate("Update Course Set CourseName = '"+CRS_NewName_Edit_Text+"' Where Code = "+ CRS_CourseID_Edit_Text);
-            // The query that edits a Course's grade
+            // The query that edits a Course's name
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(new CoursesGUI(),"Error has occured, please make sure all the data entered is correct");

@@ -24,6 +24,7 @@ public class TeacherGUI extends javax.swing.JFrame {
     Teacher T =  new Teacher();    // initializing a variable to access teacher functions
     public TeacherGUI() {
         initComponents();
+        // Filling the table with all teachers
         T.Table_Data_Filling(TCH_DataTable);
     }
 
@@ -338,6 +339,7 @@ public class TeacherGUI extends javax.swing.JFrame {
 
     private void TCH_ShowAllTeachersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TCH_ShowAllTeachersActionPerformed
         // TODO add your handling code here:
+        // Filling the table with all teachers
         T.Table_Data_Filling(TCH_DataTable);
     }//GEN-LAST:event_TCH_ShowAllTeachersActionPerformed
 

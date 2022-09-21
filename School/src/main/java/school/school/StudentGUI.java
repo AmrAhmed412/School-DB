@@ -24,6 +24,7 @@ public class StudentGUI extends javax.swing.JFrame {
     public Student S = new Student();    // initializing a variable to access student functions
     public StudentGUI() {
         initComponents();
+        // Filling the table with all students
         S.Table_Data_Filling(STD_DataTable);
     }
 
@@ -347,6 +348,7 @@ public class StudentGUI extends javax.swing.JFrame {
 
     private void STD_ShowAllStudentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_STD_ShowAllStudentsActionPerformed
         // TODO add your handling code here:
+        // Filling the table with all students
         S.Table_Data_Filling(STD_DataTable);
     }//GEN-LAST:event_STD_ShowAllStudentsActionPerformed
 

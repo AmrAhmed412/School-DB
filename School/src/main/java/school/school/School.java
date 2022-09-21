@@ -56,6 +56,7 @@ class TableFilling {
         try {
             // Executing the query and filling the table
             ResultSet rs = School.s.executeQuery("Select * from "+ this.getClass().getSimpleName() + str);
+            // The function will behave differntly according to the class calling it
             ResultSetMetaData rsmd = rs.getMetaData();
             DefaultTableModel model = (DefaultTableModel) a.getModel();
             int cols = rsmd.getColumnCount();
@@ -69,7 +70,7 @@ class TableFilling {
             while(rs.next()) {
                 ID=rs.getString(1);
                 name=rs.getString(2);
-                try {
+                try {   // in case of Course table, this will exceed the column index limit
                     grade=rs.getString(3);
                     CourseID=rs.getString(4);
                     String[] row= {ID, name, grade,CourseID};
