@@ -300,7 +300,11 @@ public class StudentGUI extends javax.swing.JFrame {
         {
             JOptionPane.showMessageDialog(this,"Grade Field is empty.");
         }
-        else S.AddStudent(STD_IDText_ADD.getText(), STDNameText_ADD.getText(), STDGrade_ADD.getText(), CourseIDText_ADD.getText(), STD_DataTable);
+        else if (STDGrade_ADD.getText().toUpperCase().compareTo("F")>0||STDGrade_ADD.getText().toUpperCase().compareTo("A")<0)
+        {
+            JOptionPane.showMessageDialog(this,"Grade Value Entered is Invalid.");
+        }
+        else S.AddStudent(STD_IDText_ADD.getText(), STDNameText_ADD.getText(), STDGrade_ADD.getText().toUpperCase(), CourseIDText_ADD.getText(), STD_DataTable);
         // in case all fields have been filled, add the student
     }//GEN-LAST:event_AddBtnSTDActionPerformed
 
@@ -342,7 +346,11 @@ public class StudentGUI extends javax.swing.JFrame {
         {
             JOptionPane.showMessageDialog(this,"Grade Field is empty.");
         }
-        else S.EditStudent(STD_Grade_Edit_Text.getText(), STD_ID_Edit_Text.getText(), STD_CourseID_Edit_Text.getText(), STD_DataTable);
+        else if (STD_Grade_Edit_Text.getText().toUpperCase().compareTo("F")>0||STD_Grade_Edit_Text.getText().toUpperCase().compareTo("A")<0)
+        {
+            JOptionPane.showMessageDialog(this,"Grade Value Entered is Invalid.");
+        }
+        else S.EditStudent(STD_Grade_Edit_Text.getText().toUpperCase(), STD_ID_Edit_Text.getText(), STD_CourseID_Edit_Text.getText(), STD_DataTable);
         // Editing that student's course grade
     }//GEN-LAST:event_EditBtnSTDActionPerformed
 
