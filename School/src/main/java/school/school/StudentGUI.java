@@ -8,6 +8,7 @@ import javax.swing.table.TableModel;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,11 +22,10 @@ public class StudentGUI extends javax.swing.JFrame {
     /**
      * Creates new form StudentGUI
      */
-    public Student S = new Student();    // initializing a variable to access student functions
     public StudentGUI() {
         initComponents();
         // Filling the table with all students
-        S.Table_Data_Filling(STD_DataTable);
+        UpdateTable();
     }
 
     /**
@@ -37,7 +37,7 @@ public class StudentGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        CourseIDText_ADD = new javax.swing.JTextField();
+        StudentAddressTXT = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         EditBtnSTD = new javax.swing.JButton();
         AddBtnSTD = new javax.swing.JButton();
@@ -53,27 +53,34 @@ public class StudentGUI extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         STD_DataTable = new javax.swing.JTable();
-        STD_ID_Del_Text = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        STD_CourseID_Del_Text = new javax.swing.JTextField();
         DelBtnSTD = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
-        STDGrade_ADD = new javax.swing.JTextField();
+        STDNumber = new javax.swing.JTextField();
         STD_ShowAllCourses = new javax.swing.JButton();
-        STDShowAllCoursesText = new javax.swing.JTextField();
+        STD_ID_TXT = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         STD_ShowAllStudents = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
+        STDfees = new javax.swing.JTextField();
+        STDage = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        AddBtnSTD1 = new javax.swing.JButton();
+        EnrollCourseBTN = new javax.swing.JButton();
+        AddBtnSTD2 = new javax.swing.JButton();
+        STD_ID_Edit_Text1 = new javax.swing.JTextField();
+        STD_CourseID_Edit_Text1 = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
 
         setTitle("Student's Menu");
 
-        CourseIDText_ADD.addActionListener(new java.awt.event.ActionListener() {
+        StudentAddressTXT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CourseIDText_ADDActionPerformed(evt);
+                StudentAddressTXTActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("Course");
+        jLabel1.setText("Address");
 
         EditBtnSTD.setText("Edit");
         EditBtnSTD.addActionListener(new java.awt.event.ActionListener() {
@@ -114,10 +121,6 @@ public class StudentGUI extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(STD_DataTable);
 
-        jLabel8.setText("Student ID:");
-
-        jLabel9.setText("Course ID:");
-
         DelBtnSTD.setText("Delete");
         DelBtnSTD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,7 +128,7 @@ public class StudentGUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel10.setText("Grade");
+        jLabel10.setText("Number");
 
         STD_ShowAllCourses.setText("Show All Courses");
         STD_ShowAllCourses.addActionListener(new java.awt.event.ActionListener() {
@@ -143,6 +146,41 @@ public class StudentGUI extends javax.swing.JFrame {
             }
         });
 
+        jLabel12.setText("Fees");
+
+        STDage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                STDageActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setText("Age");
+
+        AddBtnSTD1.setText("Drop Course");
+        AddBtnSTD1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddBtnSTD1ActionPerformed(evt);
+            }
+        });
+
+        EnrollCourseBTN.setText("Enroll in Course");
+        EnrollCourseBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EnrollCourseBTNActionPerformed(evt);
+            }
+        });
+
+        AddBtnSTD2.setText("Edit Grade");
+        AddBtnSTD2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddBtnSTD2ActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setText("Student ID:");
+
+        jLabel9.setText("Course ID:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -150,76 +188,82 @@ public class StudentGUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addGap(18, 18, 18)
+                        .addComponent(STD_ID_TXT, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(DelBtnSTD, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(STD_ShowAllCourses, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane2)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGroup(layout.createSequentialGroup()
-                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(jLabel1)
-                                                        .addComponent(jLabel3))
-                                                    .addGap(32, 32, 32))
-                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                    .addComponent(jLabel2)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(47, 47, 47)))
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(STD_IDText_ADD, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(STDNameText_ADD, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(CourseIDText_ADD, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(STDGrade_ADD, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(34, 34, 34)
-                                        .addComponent(AddBtnSTD, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(130, 130, 130)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(18, 18, 18)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                        .addComponent(jLabel5)
-                                                        .addGap(20, 20, 20))
-                                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                        .addComponent(jLabel4)
-                                                        .addGap(19, 19, 19))))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addComponent(jLabel6)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel11)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(STDShowAllCoursesText, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(23, 23, 23)
-                                        .addComponent(STD_ShowAllCourses, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(26, 26, 26)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(StudentAddressTXT, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(STD_IDText_ADD, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(STDNameText_ADD, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(STDage, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(STDNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(STDfees, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(AddBtnSTD, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(EditBtnSTD, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(128, 128, 128)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                            .addComponent(jLabel5)
+                                            .addGap(20, 20, 20))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                            .addComponent(jLabel4)
+                                            .addGap(19, 19, 19)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel6)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(STD_Grade_Edit_Text, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(STD_CourseID_Edit_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(STD_ID_Edit_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(EditBtnSTD, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(23, 23, 23))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addGap(13, 13, 13)
-                        .addComponent(STD_ID_Del_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(STD_CourseID_Del_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(DelBtnSTD, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(394, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(STD_ShowAllStudents, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50))
+                                .addGap(29, 29, 29)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(EnrollCourseBTN)
+                                    .addComponent(AddBtnSTD2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel9)
+                                        .addGap(20, 20, 20))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel8)
+                                        .addGap(19, 19, 19)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(STD_CourseID_Edit_Text1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(STD_ID_Edit_Text1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(29, 29, 29)
+                                .addComponent(AddBtnSTD1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(231, 231, 231)
+                                .addComponent(STD_ShowAllStudents, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(28, 28, 28))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -227,131 +271,255 @@ public class StudentGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(35, 35, 35)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel2)
+                                    .addComponent(AddBtnSTD))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel1)
+                                    .addComponent(EditBtnSTD))
+                                .addGap(27, 27, 27)
+                                .addComponent(jLabel10))
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel7)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(108, 108, 108)
+                                .addComponent(DelBtnSTD)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(STD_ShowAllCourses))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel12)
+                                .addGap(97, 97, 97)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(STD_ID_TXT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel11)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(35, 35, 35)
+                                .addComponent(STDNameText_ADD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(StudentAddressTXT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(24, 24, 24)
+                                .addComponent(STDNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(STD_IDText_ADD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(STDage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(STDfees, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(158, 158, 158)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(STD_ID_Edit_Text1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel8))
+                                .addGap(20, 20, 20)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(STD_CourseID_Edit_Text1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel9)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(19, 19, 19)
+                                .addComponent(AddBtnSTD1))))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(STD_ID_Edit_Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))
-                        .addGap(18, 18, 18)
+                        .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(STD_CourseID_Edit_Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5)
-                            .addComponent(EditBtnSTD))
+                            .addComponent(jLabel5))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(STD_Grade_Edit_Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6)))
+                            .addComponent(jLabel6)
+                            .addComponent(AddBtnSTD2)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(STDNameText_ADD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addGap(13, 13, 13)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(STD_IDText_ADD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)
-                            .addComponent(AddBtnSTD))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(CourseIDText_ADD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel10)
-                            .addComponent(STDGrade_ADD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(63, 63, 63)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(STDShowAllCoursesText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(STD_ShowAllCourses)
-                    .addComponent(jLabel11))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(STD_ID_Del_Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel9)
-                    .addComponent(STD_CourseID_Del_Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(DelBtnSTD))
-                .addGap(7, 7, 7)
+                        .addGap(21, 21, 21)
+                        .addComponent(EnrollCourseBTN)))
+                .addGap(28, 28, 28)
                 .addComponent(STD_ShowAllStudents, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
-                .addGap(17, 17, 17))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void CourseIDText_ADDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CourseIDText_ADDActionPerformed
+    private void StudentAddressTXTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StudentAddressTXTActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_CourseIDText_ADDActionPerformed
+    }//GEN-LAST:event_StudentAddressTXTActionPerformed
+    
+    public void ShowMessage(String Message)
+    {
+        JOptionPane.showMessageDialog(this,Message);
+    }
+    
+    // Overloading the function with empty strings to avoid the where clause
+    public void UpdateTable()
+    {
+        UpdateTable("");
+    }
 
+    public void UpdateTable(String str)
+    {
+        // Removing top empty rows from the table
+        DefaultTableModel dtm = (DefaultTableModel) STD_DataTable.getModel();
+        dtm.setRowCount(0);
+        try {
+            // Executing the query and filling the table
+            ResultSet rs = new StudentRepo().ShowTable(str);
+            // The function will behave differntly according to the class calling it
+            ResultSetMetaData rsmd = rs.getMetaData();
+            DefaultTableModel model = (DefaultTableModel) STD_DataTable.getModel();
+            int cols = rsmd.getColumnCount();
+            String[] colName = new String [cols];
+            for(int i=0; i<cols; i++)
+            {
+                colName[i] = rsmd.getColumnName(i+1);
+            }
+            model.setColumnIdentifiers(colName);
+            String ID, name, address, number, age, fees;
+            while(rs.next()) {
+                ID=rs.getString(1);
+                name=rs.getString(2);
+                address=rs.getString(3);
+                number=rs.getString(4);
+                age=rs.getString(5);
+                fees=rs.getString(6);
+                String[] row= {ID, name, address, number, age, fees};
+                model.addRow(row); // adding a row to the table
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CoursesGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     private void AddBtnSTDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddBtnSTDActionPerformed
         // Checking if there is an empty text box
-        if (STDNameText_ADD.getText().equals(""))
+        if (STD_IDText_ADD.getText().equals(""))
         {
-            JOptionPane.showMessageDialog(this,"Student Name Field is empty.");
+            ShowMessage("Student ID Field is empty.");
         }
-        else if (STD_IDText_ADD.getText().equals(""))
+        else if (STDNameText_ADD.getText().equals(""))
         {
-            JOptionPane.showMessageDialog(this,"Student ID Field is empty.");
+            ShowMessage("Student Name Field is empty.");
         }
-        else if (CourseIDText_ADD.getText().equals(""))
+        else
         {
-            JOptionPane.showMessageDialog(this,"Course ID Field is empty.");
+            String Age = STDage.getText();
+            String Fees = STDfees.getText();
+            if (STDage.getText().equals(""))
+            {
+                Age = "-1";     // assigning a default value
+            }
+            if (STDfees.getText().equals(""))
+            {
+                Fees = "-1";    // assigning a default value
+            }
+            try{
+                Student STD = new Student(Integer.parseInt(STD_IDText_ADD.getText()), STDNameText_ADD.getText(), StudentAddressTXT.getText(),  STDNumber.getText(), null, Integer.parseInt(Age), Integer.parseInt(Fees));
+                new StudentRepo().AddStudent(STD);
+            }
+            catch(Exception e)
+            {
+                ShowMessage(e.getMessage());
+            }
         }
-        else if (STDGrade_ADD.getText().equals(""))
-        {
-            JOptionPane.showMessageDialog(this,"Grade Field is empty.");
-        }
-        else S.AddStudent(STD_IDText_ADD.getText(), STDNameText_ADD.getText(), STDGrade_ADD.getText(), CourseIDText_ADD.getText(), STD_DataTable);
-        // in case all fields have been filled, add the student
+        UpdateTable();
     }//GEN-LAST:event_AddBtnSTDActionPerformed
 
     private void STD_ShowAllCoursesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_STD_ShowAllCoursesActionPerformed
         // TODO add your handling code here:
         // Checking if there is an empty text box
-        if (STDShowAllCoursesText.getText().equals(""))
+        if (STD_ID_TXT.getText().equals(""))
         {
-            JOptionPane.showMessageDialog(this,"Student ID Field is empty.");
+            ShowMessage("Student ID Field is empty.");
         }
-        else S.Table_Data_Filling(STD_DataTable," Where ID ="+STDShowAllCoursesText.getText()); // Filling the table with the student's courses
+//        else S.Table_Data_Filling(STD_DataTable," Where ID ="+STDShowAllCoursesText.getText()); // Filling the table with the student's courses
     }//GEN-LAST:event_STD_ShowAllCoursesActionPerformed
 
     private void DelBtnSTDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DelBtnSTDActionPerformed
-        // Checking if there is an empty text box 
-        if (STD_ID_Del_Text.getText().equals(""))
+        // Checking if there is an empty text box
+        if (STD_ID_TXT.getText().equals(""))
         {
-            JOptionPane.showMessageDialog(this,"Student ID Field is empty.");
+            ShowMessage("Student ID Field is empty.");
         }
-        else if (STD_CourseID_Del_Text.getText().equals(""))
+        else
         {
-            JOptionPane.showMessageDialog(this,"Course ID Field is empty.");
+            Student STD = new Student();
+            try{
+                STD.setID(Integer.parseInt(STD_ID_TXT.getText()));
+                new StudentRepo().DeleteStudent(STD);
+            }
+            catch(Exception e)
+            {
+                ShowMessage(e.getMessage());
+            }
+            
         }
-        else S.DeleteStudent(STD_ID_Del_Text.getText(), STD_CourseID_Del_Text.getText(), STD_DataTable);
-        // Deleting that student's course data
+        UpdateTable();
     }//GEN-LAST:event_DelBtnSTDActionPerformed
 
     private void EditBtnSTDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditBtnSTDActionPerformed
         // Checking if there is an empty text box
-        if (STD_ID_Edit_Text.getText().equals(""))
+        if (STD_IDText_ADD.getText().equals(""))
         {
-            JOptionPane.showMessageDialog(this,"Student ID Field is empty.");
+            ShowMessage("Student ID Field is empty.");
         }
-        else if (STD_CourseID_Edit_Text.getText().equals(""))
+        else
         {
-            JOptionPane.showMessageDialog(this,"Course ID Field is empty.");
+            String Age = STDage.getText();
+            String Fees = STDfees.getText();
+            if (STDage.getText().equals(""))
+            {
+                Age = "-1";     // assigning a default value
+            }
+            if (STDfees.getText().equals(""))
+            {
+                Fees = "-1";    // assigning a default value
+            }
+            try{
+                Student STD = new Student(Integer.parseInt(STD_IDText_ADD.getText()), STDNameText_ADD.getText(), StudentAddressTXT.getText(),  STDNumber.getText(), null, Integer.parseInt(Age), Integer.parseInt(Fees));
+                new StudentRepo().EditStudent(STD);
+            }
+            catch(Exception e)
+            {
+                ShowMessage(e.getMessage());
+            }
         }
-        else if (STD_Grade_Edit_Text.getText().equals(""))
-        {
-            JOptionPane.showMessageDialog(this,"Grade Field is empty.");
-        }
-        else S.EditStudent(STD_Grade_Edit_Text.getText(), STD_ID_Edit_Text.getText(), STD_CourseID_Edit_Text.getText(), STD_DataTable);
-        // Editing that student's course grade
+        UpdateTable();
     }//GEN-LAST:event_EditBtnSTDActionPerformed
 
     private void STD_ShowAllStudentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_STD_ShowAllStudentsActionPerformed
         // TODO add your handling code here:
         // Filling the table with all students
-        S.Table_Data_Filling(STD_DataTable);
+        UpdateTable();
     }//GEN-LAST:event_STD_ShowAllStudentsActionPerformed
 
+    private void STDageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_STDageActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_STDageActionPerformed
+
+    private void AddBtnSTD1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddBtnSTD1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AddBtnSTD1ActionPerformed
+
+    private void EnrollCourseBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnrollCourseBTNActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EnrollCourseBTNActionPerformed
+
+    private void AddBtnSTD2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddBtnSTD2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AddBtnSTD2ActionPerformed
+    
     /**
      * @param args the command line arguments
      */
@@ -390,74 +558,38 @@ public class StudentGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddBtnSTD;
-    private javax.swing.JTextField CourseIDText_ADD;
+    private javax.swing.JButton AddBtnSTD1;
+    private javax.swing.JButton AddBtnSTD2;
     private javax.swing.JButton DelBtnSTD;
     private javax.swing.JButton EditBtnSTD;
-    private javax.swing.JTextField STDGrade_ADD;
+    private javax.swing.JButton EnrollCourseBTN;
     private javax.swing.JTextField STDNameText_ADD;
-    private javax.swing.JTextField STDShowAllCoursesText;
-    private javax.swing.JTextField STD_CourseID_Del_Text;
+    private javax.swing.JTextField STDNumber;
     private javax.swing.JTextField STD_CourseID_Edit_Text;
+    private javax.swing.JTextField STD_CourseID_Edit_Text1;
     private javax.swing.JTable STD_DataTable;
     private javax.swing.JTextField STD_Grade_Edit_Text;
     private javax.swing.JTextField STD_IDText_ADD;
-    private javax.swing.JTextField STD_ID_Del_Text;
     private javax.swing.JTextField STD_ID_Edit_Text;
+    private javax.swing.JTextField STD_ID_Edit_Text1;
+    private javax.swing.JTextField STD_ID_TXT;
     private javax.swing.JButton STD_ShowAllCourses;
     private javax.swing.JButton STD_ShowAllStudents;
+    private javax.swing.JTextField STDage;
+    private javax.swing.JTextField STDfees;
+    private javax.swing.JTextField StudentAddressTXT;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }
-
-class Student extends TableFilling
-{   
-    Student(){};
-
-    // Function to add student
-    public void AddStudent(String STD_IDText_ADD, String STDNameText_ADD, String STDGrade_ADD, String CourseIDText_ADD, JTable STD_DataTable)
-    {
-        try {
-            int count =  School.s.executeUpdate("insert into Student values ("+ STD_IDText_ADD +",'"+STDNameText_ADD+"','"+STDGrade_ADD +"',"+CourseIDText_ADD+")");
-            // The query that adds a student to the School database
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(new StudentGUI(),"Error has occured, please make sure all the data entered is correct");
-        }
-        Table_Data_Filling(STD_DataTable);  // Showing the table after modification
-    }
-
-    // Function to edit student grade
-    public void EditStudent(String STD_Grade_Edit_Text, String STD_ID_Edit_Text, String STD_CourseID_Edit_Text, JTable STD_DataTable)
-    {
-        try {
-            int count =  School.s.executeUpdate("Update Student Set Grade = '"+STD_Grade_Edit_Text+"' Where ID = "+ STD_ID_Edit_Text +"AND CourseID = '"+STD_CourseID_Edit_Text+"'");
-            // The query that edits a student's grade
-
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(new StudentGUI(),"Error has occured, please make sure all the data entered is correct");
-        }
-            Table_Data_Filling(STD_DataTable);  // Showing the table after modification
-    }
-
-    // Function to delete student
-    public void DeleteStudent(String STD_ID_Del_Text, String STD_CourseID_Del_Text, JTable STD_DataTable)
-    {
-        try {
-            int count =  School.s.executeUpdate("Delete From Student Where ID = "+ STD_ID_Del_Text +"AND CourseID = '"+STD_CourseID_Del_Text+"'");
-            // The query that deletes a student from the database
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(new StudentGUI(),"Error has occured, please make sure all the data entered is correct");
-        }
-            Table_Data_Filling(STD_DataTable);  // Showing the table after modification
-    }
-}
-
