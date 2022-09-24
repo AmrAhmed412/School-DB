@@ -25,7 +25,7 @@ public class StudentGUI extends javax.swing.JFrame {
     public StudentGUI() {
         initComponents();
         // Filling the table with all students
-        UpdateTable();
+        StudentGUI.this.UpdateStudentTable();
     }
 
     /**
@@ -45,9 +45,9 @@ public class StudentGUI extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         STD_IDText_ADD = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        STD_ID_Edit_Text = new javax.swing.JTextField();
-        STD_CourseID_Edit_Text = new javax.swing.JTextField();
-        STD_Grade_Edit_Text = new javax.swing.JTextField();
+        STD_CRS_ID = new javax.swing.JTextField();
+        STD_CourseID = new javax.swing.JTextField();
+        STD_Grade = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -64,11 +64,11 @@ public class StudentGUI extends javax.swing.JFrame {
         STDfees = new javax.swing.JTextField();
         STDage = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        AddBtnSTD1 = new javax.swing.JButton();
+        DropCourseBTN = new javax.swing.JButton();
         EnrollCourseBTN = new javax.swing.JButton();
         AddBtnSTD2 = new javax.swing.JButton();
-        STD_ID_Edit_Text1 = new javax.swing.JTextField();
-        STD_CourseID_Edit_Text1 = new javax.swing.JTextField();
+        STD_ID_Drop = new javax.swing.JTextField();
+        STD_CourseID_Drop = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
 
@@ -156,10 +156,10 @@ public class StudentGUI extends javax.swing.JFrame {
 
         jLabel7.setText("Age");
 
-        AddBtnSTD1.setText("Drop Course");
-        AddBtnSTD1.addActionListener(new java.awt.event.ActionListener() {
+        DropCourseBTN.setText("Drop Course");
+        DropCourseBTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AddBtnSTD1ActionPerformed(evt);
+                DropCourseBTNActionPerformed(evt);
             }
         });
 
@@ -239,9 +239,9 @@ public class StudentGUI extends javax.swing.JFrame {
                                         .addComponent(jLabel6)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(STD_Grade_Edit_Text, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(STD_CourseID_Edit_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(STD_ID_Edit_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(STD_Grade, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(STD_CourseID, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(STD_CRS_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(29, 29, 29)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(EnrollCourseBTN)
@@ -256,10 +256,10 @@ public class StudentGUI extends javax.swing.JFrame {
                                         .addComponent(jLabel8)
                                         .addGap(19, 19, 19)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(STD_CourseID_Edit_Text1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(STD_ID_Edit_Text1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(STD_CourseID_Drop, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(STD_ID_Drop, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(29, 29, 29)
-                                .addComponent(AddBtnSTD1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(DropCourseBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(231, 231, 231)
                                 .addComponent(STD_ShowAllStudents, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -318,26 +318,26 @@ public class StudentGUI extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(STD_ID_Edit_Text1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(STD_ID_Drop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel8))
                                 .addGap(20, 20, 20)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(STD_CourseID_Edit_Text1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(STD_CourseID_Drop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel9)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(19, 19, 19)
-                                .addComponent(AddBtnSTD1))))
+                                .addComponent(DropCourseBTN))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(STD_ID_Edit_Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(STD_CRS_ID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))
                         .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(STD_CourseID_Edit_Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(STD_CourseID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(STD_Grade_Edit_Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(STD_Grade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6)
                             .addComponent(AddBtnSTD2)))
                     .addGroup(layout.createSequentialGroup()
@@ -363,12 +363,12 @@ public class StudentGUI extends javax.swing.JFrame {
     }
     
     // Overloading the function with empty strings to avoid the where clause
-    public void UpdateTable()
+    public void UpdateStudentTable()
     {
-        UpdateTable("");
+        UpdateStudentTable("");
     }
 
-    public void UpdateTable(String str)
+    public void UpdateStudentTable(String str)
     {
         // Removing top empty rows from the table
         DefaultTableModel dtm = (DefaultTableModel) STD_DataTable.getModel();
@@ -395,6 +395,45 @@ public class StudentGUI extends javax.swing.JFrame {
                 age=rs.getString(5);
                 fees=rs.getString(6);
                 String[] row= {ID, name, address, number, age, fees};
+                model.addRow(row); // adding a row to the table
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CoursesGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    // Overloading the function with empty strings to avoid the where clause
+    public void UpdateStudentCourseTable()
+    {
+        UpdateStudentCourseTable("");
+    }
+
+    public void UpdateStudentCourseTable(String str)
+    {
+        // Removing top empty rows from the table
+        DefaultTableModel dtm = (DefaultTableModel) STD_DataTable.getModel();
+        dtm.setRowCount(0);
+        try {
+            // Executing the query and filling the table
+            ResultSet rs = new StudentCourseService().ShowTable(str);
+            // The function will behave differntly according to the class calling it
+            ResultSetMetaData rsmd = rs.getMetaData();
+            DefaultTableModel model = (DefaultTableModel) STD_DataTable.getModel();
+            int cols = rsmd.getColumnCount();       // 8albn t7t momkn n-for loop 3la el rakam dh gowa el while
+            String[] colName = new String [cols];
+            for(int i=0; i<cols; i++)
+            {
+                colName[i] = rsmd.getColumnName(i+1);
+            }
+            model.setColumnIdentifiers(colName);
+            String StudentID, CourseID, StudentName, CourseName, Grade;
+            while(rs.next()) {
+                StudentID=rs.getString(1);
+                CourseID=rs.getString(2);
+                StudentName=rs.getString(3);
+                CourseName=rs.getString(4);
+                Grade=rs.getString(5);
+                String[] row= {StudentID, CourseID, StudentName, CourseName, Grade};
                 model.addRow(row); // adding a row to the table
             }
         } catch (SQLException ex) {
@@ -433,7 +472,7 @@ public class StudentGUI extends javax.swing.JFrame {
                 ShowMessage(e.getMessage());
             }
         }
-        UpdateTable();
+        UpdateStudentTable();
     }//GEN-LAST:event_AddBtnSTDActionPerformed
 
     private void STD_ShowAllCoursesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_STD_ShowAllCoursesActionPerformed
@@ -441,7 +480,14 @@ public class StudentGUI extends javax.swing.JFrame {
         // Checking if there is an empty text box
         if (STD_ID_TXT.getText().equals(""))
         {
-            ShowMessage("Student ID Field is empty.");
+            UpdateStudentCourseTable();     // In case ID text field is empty, show all Student courses
+//            ShowMessage("Student ID Field is empty.");
+        }
+        else
+        {
+            Student STD = new Student();
+            STD.setID(Integer.parseInt(STD_ID_TXT.getText()));
+            UpdateStudentCourseTable("Where Student.ID = " + STD.getID());
         }
 //        else S.Table_Data_Filling(STD_DataTable," Where ID ="+STDShowAllCoursesText.getText()); // Filling the table with the student's courses
     }//GEN-LAST:event_STD_ShowAllCoursesActionPerformed
@@ -465,7 +511,7 @@ public class StudentGUI extends javax.swing.JFrame {
             }
             
         }
-        UpdateTable();
+        UpdateStudentTable();
     }//GEN-LAST:event_DelBtnSTDActionPerformed
 
     private void EditBtnSTDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditBtnSTDActionPerformed
@@ -495,83 +541,164 @@ public class StudentGUI extends javax.swing.JFrame {
                 ShowMessage(e.getMessage());
             }
         }
-        UpdateTable();
+        UpdateStudentTable();
     }//GEN-LAST:event_EditBtnSTDActionPerformed
 
     private void STD_ShowAllStudentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_STD_ShowAllStudentsActionPerformed
         // TODO add your handling code here:
         // Filling the table with all students
-        UpdateTable();
+        UpdateStudentTable();
     }//GEN-LAST:event_STD_ShowAllStudentsActionPerformed
 
     private void STDageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_STDageActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_STDageActionPerformed
 
-    private void AddBtnSTD1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddBtnSTD1ActionPerformed
+    private void DropCourseBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DropCourseBTNActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_AddBtnSTD1ActionPerformed
+        // Checking if there is an empty text box
+        if (STD_ID_Drop.getText().equals(""))
+        {
+            ShowMessage("Student ID Field is empty.");
+        }
+        else if (STD_CourseID_Drop.getText().equals(""))
+        {
+            ShowMessage("Course ID Field is empty.");
+        }
+        else
+        {
+            Student STD = new Student();
+            Course CRS = new Course();
+            try{
+                STD.setID(Integer.parseInt(STD_ID_Drop.getText()));
+                CRS.setID(Integer.parseInt(STD_CourseID_Drop.getText()));
+                new StudentCourseService().Drop(STD, CRS);
+            }
+            catch(Exception e)
+            {
+                ShowMessage(e.getMessage());
+            }
+            
+        }
+        UpdateStudentCourseTable();
+    }//GEN-LAST:event_DropCourseBTNActionPerformed
 
     private void EnrollCourseBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnrollCourseBTNActionPerformed
         // TODO add your handling code here:
+        if (STD_CRS_ID.getText().equals(""))
+        {
+            ShowMessage("Student ID Field is empty.");
+        }
+        else if (STD_CourseID.getText().equals(""))
+        {
+            ShowMessage("Course ID Field is empty.");
+        }
+        else
+        {
+            String Grade = STD_Grade.getText().toUpperCase();
+            if (STD_Grade.getText().equals(""))
+            {
+                Grade = "U";     // assigning a default value of Undetermined
+            }
+            try{
+                Student STD = new Student();
+                STD.setID(Integer.parseInt(STD_CRS_ID.getText()));
+                
+                Course CRS = new Course();
+                CRS.setID(Integer.parseInt(STD_CourseID.getText()));
+                new StudentCourseService().Enroll(STD, CRS, Grade);
+            }
+            catch(Exception e)
+            {
+                ShowMessage(e.getMessage());
+            }
+        }
+        UpdateStudentCourseTable();
     }//GEN-LAST:event_EnrollCourseBTNActionPerformed
 
     private void AddBtnSTD2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddBtnSTD2ActionPerformed
         // TODO add your handling code here:
+        if (STD_CRS_ID.getText().equals(""))
+        {
+            ShowMessage("Student ID Field is empty.");
+        }
+        else if (STD_CourseID.getText().equals(""))
+        {
+            ShowMessage("Course ID Field is empty.");
+        }
+        else if (STD_Grade.getText().equals(""))
+        {
+            ShowMessage("Grade Field is empty.");
+        }
+        else {
+            try{
+                Student STD = new Student();
+                STD.setID(Integer.parseInt(STD_CRS_ID.getText()));
+                
+                Course CRS = new Course();
+                CRS.setID(Integer.parseInt(STD_CourseID.getText()));
+                new StudentCourseService().EditGrade(STD, CRS, STD_Grade.getText().toUpperCase());
+            }
+            catch(Exception e)
+            {
+                ShowMessage(e.getMessage());
+            }
+        }
+        UpdateStudentCourseTable();
     }//GEN-LAST:event_AddBtnSTD2ActionPerformed
     
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(StudentGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(StudentGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(StudentGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(StudentGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                // Showing the Student data window
-                new StudentGUI().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(StudentGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(StudentGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(StudentGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(StudentGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                // Showing the Student data window
+//                new StudentGUI().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddBtnSTD;
-    private javax.swing.JButton AddBtnSTD1;
     private javax.swing.JButton AddBtnSTD2;
     private javax.swing.JButton DelBtnSTD;
+    private javax.swing.JButton DropCourseBTN;
     private javax.swing.JButton EditBtnSTD;
     private javax.swing.JButton EnrollCourseBTN;
     private javax.swing.JTextField STDNameText_ADD;
     private javax.swing.JTextField STDNumber;
-    private javax.swing.JTextField STD_CourseID_Edit_Text;
-    private javax.swing.JTextField STD_CourseID_Edit_Text1;
+    private javax.swing.JTextField STD_CRS_ID;
+    private javax.swing.JTextField STD_CourseID;
+    private javax.swing.JTextField STD_CourseID_Drop;
     private javax.swing.JTable STD_DataTable;
-    private javax.swing.JTextField STD_Grade_Edit_Text;
+    private javax.swing.JTextField STD_Grade;
     private javax.swing.JTextField STD_IDText_ADD;
-    private javax.swing.JTextField STD_ID_Edit_Text;
-    private javax.swing.JTextField STD_ID_Edit_Text1;
+    private javax.swing.JTextField STD_ID_Drop;
     private javax.swing.JTextField STD_ID_TXT;
     private javax.swing.JButton STD_ShowAllCourses;
     private javax.swing.JButton STD_ShowAllStudents;

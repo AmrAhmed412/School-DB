@@ -364,46 +364,46 @@ public class CoursesGUI extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
 }
+//
+//class Course extends TableFilling
+//{   
+//    Course(){};
+//
+//    // Function to add Courses
+//    public void AddCourse(String CRS_IDText_ADD, String CRSNameText_ADD, JTable CRS_DataTable)
+//    {
+//        try {
+//            int count =  School.s.executeUpdate("insert into Course values ("+ CRS_IDText_ADD +",'"+CRSNameText_ADD+"')");
+//            // The query that adds a Course to the School database
+//        } catch (Exception ex) {
+//            JOptionPane.showMessageDialog(new CoursesGUI(),"Error has occured, please make sure all the data entered is correct");
+//        }
+//        Table_Data_Filling(CRS_DataTable);  // Showing the table after modification
+//    }
+//
+//    // Function to edit Course name
+//    public void EditCourse(String CRS_NewName_Edit_Text, String CRS_CourseID_Edit_Text, JTable CRS_DataTable)
+//    {
+//        try {
+//            int count =  School.s.executeUpdate("Update Course Set CourseName = '"+CRS_NewName_Edit_Text+"' Where Code = "+ CRS_CourseID_Edit_Text);
+//            // The query that edits a Course's name
+//
+//        } catch (Exception ex) {
+//            JOptionPane.showMessageDialog(new CoursesGUI(),"Error has occured, please make sure all the data entered is correct");
+//        }
+//            Table_Data_Filling(CRS_DataTable);  // Showing the table after modification
+//    }
+//
+//    // Function to delete Course
+//    public void DeleteCourse(String CRS_CourseID_Del_Text, JTable CRS_DataTable)
+//    {
+//        try {
+//            int count =  School.s.executeUpdate("Delete From Course Where Code = "+ CRS_CourseID_Del_Text);
+//            // The query that deletes a Course from the database
+//        } catch (Exception ex) {
+//            JOptionPane.showMessageDialog(new CoursesGUI(),"Error has occured, please make sure all the data entered is correct");
+//        }
+//            Table_Data_Filling(CRS_DataTable);  // Showing the table after modification
+//    }
 
-class Course extends TableFilling
-{   
-    Course(){};
-
-    // Function to add Courses
-    public void AddCourse(String CRS_IDText_ADD, String CRSNameText_ADD, JTable CRS_DataTable)
-    {
-        try {
-            int count =  School.s.executeUpdate("insert into Course values ("+ CRS_IDText_ADD +",'"+CRSNameText_ADD+"')");
-            // The query that adds a Course to the School database
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(new CoursesGUI(),"Error has occured, please make sure all the data entered is correct");
-        }
-        Table_Data_Filling(CRS_DataTable);  // Showing the table after modification
-    }
-
-    // Function to edit Course name
-    public void EditCourse(String CRS_NewName_Edit_Text, String CRS_CourseID_Edit_Text, JTable CRS_DataTable)
-    {
-        try {
-            int count =  School.s.executeUpdate("Update Course Set CourseName = '"+CRS_NewName_Edit_Text+"' Where Code = "+ CRS_CourseID_Edit_Text);
-            // The query that edits a Course's name
-
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(new CoursesGUI(),"Error has occured, please make sure all the data entered is correct");
-        }
-            Table_Data_Filling(CRS_DataTable);  // Showing the table after modification
-    }
-
-    // Function to delete Course
-    public void DeleteCourse(String CRS_CourseID_Del_Text, JTable CRS_DataTable)
-    {
-        try {
-            int count =  School.s.executeUpdate("Delete From Course Where Code = "+ CRS_CourseID_Del_Text);
-            // The query that deletes a Course from the database
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(new CoursesGUI(),"Error has occured, please make sure all the data entered is correct");
-        }
-            Table_Data_Filling(CRS_DataTable);  // Showing the table after modification
-    }
-
-}
+//}

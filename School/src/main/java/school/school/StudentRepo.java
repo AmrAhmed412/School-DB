@@ -71,7 +71,8 @@ public class StudentRepo {
             int count =  School.s.executeUpdate("Delete From Student Where ID = "+ STD.getID());
             // The query that deletes a student from the database
         } catch (Exception ex) {
-            new StudentGUI().ShowMessage("Error has occured, please make sure all the data entered is correct");
+            new StudentGUI().ShowMessage(ex.getMessage());
+//            new StudentGUI().ShowMessage("Error has occured, please make sure all the data entered is correct");
         }
 //            Table_Data_Filling(STD_DataTable);  // Showing the table after modification
     }

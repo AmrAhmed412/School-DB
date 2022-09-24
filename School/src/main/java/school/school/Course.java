@@ -12,11 +12,13 @@ public class Course {
     private int ID;
     private String Name;
     
+    Course(){}
     Course(int ID, String Name)
     {
         setID(ID);
         setName(Name);
     }
+    
     
     public int getID() {
         return ID;

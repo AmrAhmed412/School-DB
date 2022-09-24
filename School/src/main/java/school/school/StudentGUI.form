@@ -91,9 +91,9 @@
                                   </Group>
                               </Group>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="STD_Grade_Edit_Text" alignment="1" min="-2" pref="119" max="-2" attributes="0"/>
-                                  <Component id="STD_CourseID_Edit_Text" alignment="0" min="-2" pref="119" max="-2" attributes="0"/>
-                                  <Component id="STD_ID_Edit_Text" alignment="0" min="-2" pref="119" max="-2" attributes="0"/>
+                                  <Component id="STD_Grade" alignment="1" min="-2" pref="119" max="-2" attributes="0"/>
+                                  <Component id="STD_CourseID" alignment="0" min="-2" pref="119" max="-2" attributes="0"/>
+                                  <Component id="STD_CRS_ID" alignment="0" min="-2" pref="119" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
@@ -114,11 +114,11 @@
                                   </Group>
                               </Group>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="STD_CourseID_Edit_Text1" alignment="0" min="-2" pref="119" max="-2" attributes="0"/>
-                                  <Component id="STD_ID_Edit_Text1" alignment="0" min="-2" pref="119" max="-2" attributes="0"/>
+                                  <Component id="STD_CourseID_Drop" alignment="0" min="-2" pref="119" max="-2" attributes="0"/>
+                                  <Component id="STD_ID_Drop" alignment="0" min="-2" pref="119" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                              <Component id="AddBtnSTD1" min="-2" pref="112" max="-2" attributes="0"/>
+                              <Component id="DropCourseBTN" min="-2" pref="112" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="231" max="-2" attributes="0"/>
@@ -196,34 +196,34 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="STD_ID_Edit_Text1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="STD_ID_Drop" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="STD_CourseID_Edit_Text1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="STD_CourseID_Drop" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-                              <Component id="AddBtnSTD1" min="-2" max="-2" attributes="0"/>
+                              <Component id="DropCourseBTN" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="STD_ID_Edit_Text" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="STD_CRS_ID" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="STD_CourseID_Edit_Text" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="STD_CourseID" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="STD_Grade_Edit_Text" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="STD_Grade" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="AddBtnSTD2" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -286,11 +286,11 @@
         <Property name="text" type="java.lang.String" value="Student ID:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="STD_ID_Edit_Text">
+    <Component class="javax.swing.JTextField" name="STD_CRS_ID">
     </Component>
-    <Component class="javax.swing.JTextField" name="STD_CourseID_Edit_Text">
+    <Component class="javax.swing.JTextField" name="STD_CourseID">
     </Component>
-    <Component class="javax.swing.JTextField" name="STD_Grade_Edit_Text">
+    <Component class="javax.swing.JTextField" name="STD_Grade">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
@@ -410,12 +410,12 @@
         <Property name="text" type="java.lang.String" value="Age"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="AddBtnSTD1">
+    <Component class="javax.swing.JButton" name="DropCourseBTN">
       <Properties>
         <Property name="text" type="java.lang.String" value="Drop Course"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AddBtnSTD1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DropCourseBTNActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="EnrollCourseBTN">
@@ -434,9 +434,9 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AddBtnSTD2ActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="STD_ID_Edit_Text1">
+    <Component class="javax.swing.JTextField" name="STD_ID_Drop">
     </Component>
-    <Component class="javax.swing.JTextField" name="STD_CourseID_Edit_Text1">
+    <Component class="javax.swing.JTextField" name="STD_CourseID_Drop">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel8">
       <Properties>
