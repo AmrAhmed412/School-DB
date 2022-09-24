@@ -322,6 +322,44 @@ public class CoursesGUI extends javax.swing.JFrame {
         }
     }
     
+    // Overloading the function with empty strings to avoid the where clause
+    public void UpdateTeacherCourseTable()
+    {
+        UpdateTeacherCourseTable("");
+    }
+
+    public void UpdateTeacherCourseTable(String str)
+    {
+        // Removing top empty rows from the table
+        DefaultTableModel dtm = (DefaultTableModel) CRS_DataTable.getModel();
+        dtm.setRowCount(0);
+        try {
+            // Executing the query and filling the table
+            ResultSet rs = new TeacherCourseService().ShowTable(str);
+            // The function will behave differntly according to the class calling it
+            ResultSetMetaData rsmd = rs.getMetaData();
+            DefaultTableModel model = (DefaultTableModel) CRS_DataTable.getModel();
+            int cols = rsmd.getColumnCount();       // 8albn t7t momkn n-for loop 3la el rakam dh gowa el while
+            String[] colName = new String [cols];
+            for(int i=0; i<cols; i++)
+            {
+                colName[i] = rsmd.getColumnName(i+1);
+            }
+            model.setColumnIdentifiers(colName);
+            String TeacherID, CourseID, TeacherName, CourseName;
+            while(rs.next()) {
+                TeacherID=rs.getString(1);
+                CourseID=rs.getString(2);
+                TeacherName=rs.getString(3);
+                CourseName=rs.getString(4);
+                String[] row= {TeacherID, CourseID, TeacherName, CourseName};
+                model.addRow(row); // adding a row to the table
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CoursesGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     private void DelBtnCRSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DelBtnCRSActionPerformed
         // Checking if there is an empty text box
         if (CRS_CourseID_Del_Text.getText().equals(""))
@@ -346,13 +384,16 @@ public class CoursesGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_DelBtnCRSActionPerformed
 
     private void CRS_ShowAllTeachersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CRS_ShowAllTeachersActionPerformed
-        // TODO add your handling code here:
-        // Checking if there is an empty text box
         if (CRSShowAllCoursesText.getText().equals(""))
         {
-            ShowMessage("Course ID Field is empty.");
+            UpdateTeacherCourseTable();     // In case ID text field is empty, show all Teacher courses
         }
-        else T.Table_Data_Filling(CRS_DataTable," Where CourseID ="+CRSShowAllCoursesText.getText()); // Filling the table with the Course's teachers
+        else
+        {
+            Course CRS = new Course();
+            CRS.setID(Integer.parseInt(CRSShowAllCoursesText.getText()));
+            UpdateTeacherCourseTable("Where Course.ID = " + CRS.getID());
+        } // Filling the table with the Course's students 
     }//GEN-LAST:event_CRS_ShowAllTeachersActionPerformed
 
     private void EditBtnCRSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditBtnCRSActionPerformed
@@ -412,11 +453,13 @@ public class CoursesGUI extends javax.swing.JFrame {
         // Checking if there is an empty text box
         if (CRSShowAllCoursesText.getText().equals(""))
         {
-            ShowMessage("Course ID Field is empty.");
+            UpdateStudentCourseTable();     // In case ID text field is empty, show all Student courses
         }
         else
         {
-            std.Table_Data_Filling(CRS_DataTable," Where CourseID ="+CRSShowAllCoursesText.getText());
+            Course CRS = new Course();
+            CRS.setID(Integer.parseInt(CRSShowAllCoursesText.getText()));
+            UpdateStudentCourseTable("Where Course.ID = " + CRS.getID());
         } // Filling the table with the Course's students 
     }//GEN-LAST:event_CRS_ShowAllStudentsActionPerformed
 
