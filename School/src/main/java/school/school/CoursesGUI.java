@@ -22,14 +22,15 @@ public class CoursesGUI extends javax.swing.JFrame {
     /**
      * Creates new form CoursesGUI
      */
-    public Course c = new Course();
-    public Student std = new Student();
-    public Teacher T = new Teacher();
+//    public Course c = new Course();
+//    public Student std = new Student();
+//    public Teacher T = new Teacher();
        
     public CoursesGUI() {
         initComponents();
         // Filling the table with all courses
-        c.Table_Data_Filling(CRS_DataTable);
+//        c.Table_Data_Filling(CRS_DataTable);
+        CoursesGUI.this.UpdateCourseTable();
     }
 
     /**
@@ -207,21 +208,21 @@ public class CoursesGUI extends javax.swing.JFrame {
                             .addComponent(EditBtnCRS)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(CRSNameText_ADD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addGap(13, 13, 13)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(CRS_IDText_ADD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(CRS_CourseID_Edit_Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(CRS_NewName_Edit_Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))))
-                .addGap(61, 61, 61)
+                            .addComponent(jLabel6)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(CRS_IDText_ADD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(CRSNameText_ADD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))))
+                .addGap(66, 66, 66)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CRSShowAllCoursesText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(CRS_ShowAllTeachers)
@@ -234,20 +235,113 @@ public class CoursesGUI extends javax.swing.JFrame {
                     .addComponent(DelBtnCRS)
                     .addComponent(CRS_ShowAllCourses, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
+    public void ShowMessage(String Message)
+    {
+        JOptionPane.showMessageDialog(this,Message);
+    }
+    
+    // Overloading the function with empty strings to avoid the where clause
+    public void UpdateCourseTable()
+    {
+        UpdateCourseTable("");
+    }
 
+    public void UpdateCourseTable(String str)
+    {
+        // Removing top empty rows from the table
+        DefaultTableModel dtm = (DefaultTableModel) CRS_DataTable.getModel();
+        dtm.setRowCount(0);
+        try {
+            // Executing the query and filling the table
+            ResultSet rs = new CourseRepo().ShowTable(str);
+            // The function will behave differntly according to the class calling it
+            ResultSetMetaData rsmd = rs.getMetaData();
+            DefaultTableModel model = (DefaultTableModel) CRS_DataTable.getModel();
+            int cols = rsmd.getColumnCount();
+            String[] colName = new String [cols];
+            for(int i=0; i<cols; i++)
+            {
+                colName[i] = rsmd.getColumnName(i+1);
+            }
+            model.setColumnIdentifiers(colName);
+            String ID, name;
+            while(rs.next()) {
+                ID=rs.getString(1);
+                name=rs.getString(2);
+                String[] row= {ID, name};
+                model.addRow(row); // adding a row to the table
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CoursesGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    // Overloading the function with empty strings to avoid the where clause
+    public void UpdateStudentCourseTable()
+    {
+        UpdateStudentCourseTable("");
+    }
+
+    public void UpdateStudentCourseTable(String str)
+    {
+        // Removing top empty rows from the table
+        DefaultTableModel dtm = (DefaultTableModel) CRS_DataTable.getModel();
+        dtm.setRowCount(0);
+        try {
+            // Executing the query and filling the table
+            ResultSet rs = new StudentCourseService().ShowTable(str);
+            // The function will behave differntly according to the class calling it
+            ResultSetMetaData rsmd = rs.getMetaData();
+            DefaultTableModel model = (DefaultTableModel) CRS_DataTable.getModel();
+            int cols = rsmd.getColumnCount();       // 8albn t7t momkn n-for loop 3la el rakam dh gowa el while
+            String[] colName = new String [cols];
+            for(int i=0; i<cols; i++)
+            {
+                colName[i] = rsmd.getColumnName(i+1);
+            }
+            model.setColumnIdentifiers(colName);
+            String StudentID, CourseID, StudentName, CourseName, Grade;
+            while(rs.next()) {
+                StudentID=rs.getString(1);
+                CourseID=rs.getString(2);
+                StudentName=rs.getString(3);
+                CourseName=rs.getString(4);
+                Grade=rs.getString(5);
+                String[] row= {StudentID, CourseID, StudentName, CourseName, Grade};
+                model.addRow(row); // adding a row to the table
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CoursesGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     private void DelBtnCRSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DelBtnCRSActionPerformed
         // Checking if there is an empty text box
         if (CRS_CourseID_Del_Text.getText().equals(""))
         {
-            JOptionPane.showMessageDialog(this,"Course ID Field is empty.");
+            ShowMessage("Course ID Field is empty.");
         }
-        else c.DeleteCourse(CRS_CourseID_Del_Text.getText(), CRS_DataTable);
+        else 
+        {
+            try
+            {
+                Course CRS = new Course();
+                CRS.setID(Integer.parseInt(CRS_CourseID_Del_Text.getText()));
+                new CourseRepo().DeleteCourse(CRS);
+            }
+            catch (Exception e)
+            {
+                ShowMessage(e.getMessage());
+            }
+        }
+        UpdateCourseTable();
         // Deleting that Course's data
     }//GEN-LAST:event_DelBtnCRSActionPerformed
 
@@ -256,7 +350,7 @@ public class CoursesGUI extends javax.swing.JFrame {
         // Checking if there is an empty text box
         if (CRSShowAllCoursesText.getText().equals(""))
         {
-            JOptionPane.showMessageDialog(this,"Course ID Field is empty.");
+            ShowMessage("Course ID Field is empty.");
         }
         else T.Table_Data_Filling(CRS_DataTable," Where CourseID ="+CRSShowAllCoursesText.getText()); // Filling the table with the Course's teachers
     }//GEN-LAST:event_CRS_ShowAllTeachersActionPerformed
@@ -265,13 +359,26 @@ public class CoursesGUI extends javax.swing.JFrame {
         // Checking if there is an empty text box
         if (CRS_CourseID_Edit_Text.getText().equals(""))
         {
-            JOptionPane.showMessageDialog(this,"Course ID Field is empty.");
+            ShowMessage("Course ID Field is empty.");
         }
         else if (CRS_NewName_Edit_Text.getText().equals(""))
         {
-            JOptionPane.showMessageDialog(this,"New Name Field is empty.");
+            ShowMessage("New Name Field is empty.");
         }
-        else c.EditCourse(CRS_NewName_Edit_Text.getText(), CRS_CourseID_Edit_Text.getText(), CRS_DataTable);
+        else
+        {
+            try
+            {
+                Course CRS = new Course(Integer.parseInt(CRS_CourseID_Edit_Text.getText()), CRS_NewName_Edit_Text.getText());
+                new CourseRepo().EditCourse(CRS);
+            }
+            catch (Exception E)
+            {
+                ShowMessage(E.getMessage());
+            }
+        }
+        UpdateCourseTable();
+//            c.EditCourse(CRS_NewName_Edit_Text.getText(), CRS_CourseID_Edit_Text.getText(), CRS_DataTable);
         // Editing that Course's name
     }//GEN-LAST:event_EditBtnCRSActionPerformed
 
@@ -279,14 +386,25 @@ public class CoursesGUI extends javax.swing.JFrame {
         // Checking if there is an empty text box
         if (CRSNameText_ADD.getText().equals(""))
         {
-            JOptionPane.showMessageDialog(this,"Course Name Field is empty.");
+            ShowMessage("Course Name Field is empty.");
         }
         else if (CRS_IDText_ADD.getText().equals(""))
         {
-            JOptionPane.showMessageDialog(this,"Course ID Field is empty.");
+            ShowMessage("Course ID Field is empty.");
         }
-        
-        else c.AddCourse(CRS_IDText_ADD.getText(), CRSNameText_ADD.getText(), CRS_DataTable);
+        else
+        {
+            try
+            {
+                Course CRS = new Course(Integer.parseInt(CRS_IDText_ADD.getText()), CRSNameText_ADD.getText());
+                new CourseRepo().AddCourse(CRS);
+            }
+            catch (Exception e)
+            {
+                ShowMessage(e.getMessage());
+            } 
+        }
+        UpdateCourseTable();
         // in case all fields have been filled, add the Course
     }//GEN-LAST:event_AddBtnCRSActionPerformed
 
@@ -294,51 +412,54 @@ public class CoursesGUI extends javax.swing.JFrame {
         // Checking if there is an empty text box
         if (CRSShowAllCoursesText.getText().equals(""))
         {
-            JOptionPane.showMessageDialog(this,"Course ID Field is empty.");
+            ShowMessage("Course ID Field is empty.");
         }
-        else std.Table_Data_Filling(CRS_DataTable," Where CourseID ="+CRSShowAllCoursesText.getText()); // Filling the table with the Course's students 
+        else
+        {
+            std.Table_Data_Filling(CRS_DataTable," Where CourseID ="+CRSShowAllCoursesText.getText());
+        } // Filling the table with the Course's students 
     }//GEN-LAST:event_CRS_ShowAllStudentsActionPerformed
 
     private void CRS_ShowAllCoursesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CRS_ShowAllCoursesActionPerformed
         // TODO add your handling code here:
         // Filling the table with all courses
-        c.Table_Data_Filling(CRS_DataTable);
+        UpdateCourseTable();
     }//GEN-LAST:event_CRS_ShowAllCoursesActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CoursesGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CoursesGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CoursesGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CoursesGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CoursesGUI().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(CoursesGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(CoursesGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(CoursesGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(CoursesGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new CoursesGUI().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddBtnCRS;
@@ -364,46 +485,4 @@ public class CoursesGUI extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
 }
-//
-//class Course extends TableFilling
-//{   
-//    Course(){};
-//
-//    // Function to add Courses
-//    public void AddCourse(String CRS_IDText_ADD, String CRSNameText_ADD, JTable CRS_DataTable)
-//    {
-//        try {
-//            int count =  School.s.executeUpdate("insert into Course values ("+ CRS_IDText_ADD +",'"+CRSNameText_ADD+"')");
-//            // The query that adds a Course to the School database
-//        } catch (Exception ex) {
-//            JOptionPane.showMessageDialog(new CoursesGUI(),"Error has occured, please make sure all the data entered is correct");
-//        }
-//        Table_Data_Filling(CRS_DataTable);  // Showing the table after modification
-//    }
-//
-//    // Function to edit Course name
-//    public void EditCourse(String CRS_NewName_Edit_Text, String CRS_CourseID_Edit_Text, JTable CRS_DataTable)
-//    {
-//        try {
-//            int count =  School.s.executeUpdate("Update Course Set CourseName = '"+CRS_NewName_Edit_Text+"' Where Code = "+ CRS_CourseID_Edit_Text);
-//            // The query that edits a Course's name
-//
-//        } catch (Exception ex) {
-//            JOptionPane.showMessageDialog(new CoursesGUI(),"Error has occured, please make sure all the data entered is correct");
-//        }
-//            Table_Data_Filling(CRS_DataTable);  // Showing the table after modification
-//    }
-//
-//    // Function to delete Course
-//    public void DeleteCourse(String CRS_CourseID_Del_Text, JTable CRS_DataTable)
-//    {
-//        try {
-//            int count =  School.s.executeUpdate("Delete From Course Where Code = "+ CRS_CourseID_Del_Text);
-//            // The query that deletes a Course from the database
-//        } catch (Exception ex) {
-//            JOptionPane.showMessageDialog(new CoursesGUI(),"Error has occured, please make sure all the data entered is correct");
-//        }
-//            Table_Data_Filling(CRS_DataTable);  // Showing the table after modification
-//    }
 
-//}
