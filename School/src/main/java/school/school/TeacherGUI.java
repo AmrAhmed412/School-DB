@@ -317,7 +317,7 @@ public class TeacherGUI extends javax.swing.JFrame {
             }
             catch(Exception e)
             {
-                ShowMessage("Error has occured, please make sure all the data entered is correct");
+                ShowMessage(e.getMessage());
             }
        
         }  
