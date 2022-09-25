@@ -10,22 +10,23 @@ import java.sql.ResultSet;
  *
  * @author User
  */
+
+
+// Connects the Teacher Table to the Course Table
 public class TeacherCourseService {
     
-    
-    
-     public void Enroll(Teacher T, Course CRS)
+    // adds a course to a teacher
+    public void Enroll(Teacher T, Course CRS)
     {
         try {
             int count =  School.s.executeUpdate("insert into TeacherCourse values ("+ T.getID() +","+CRS.getID()+")");
-            // The query that adds a student to the School database
+            // The query that adds a course to the teacher
         } catch (Exception ex) {
-            // n3ml function tsha8al el button b resala
-
             new TeacherGUI().ShowMessage(ex.getMessage());
         }
     }
     
+    // Removes a course from a teacher
     public void Drop(Teacher T, Course CRS)
     {
         try{
@@ -35,16 +36,19 @@ public class TeacherCourseService {
         }
         
     }
+    
+    // Shows Teacher and Course table
     public ResultSet ShowTable(String str)
     {
         try
         {
             return School.s.executeQuery("Select Teacher.ID as 'TeacherID', Course.ID as 'CourseID', Teacher.TeacherName, Course.CourseName from Teacher  INNER JOIN TeacherCourse ON Teacher.ID = TeacherCourse.TeacherID INNER JOIN Course ON TeacherCourse.CourseID = Course.ID " + str);
+            // Query that shows the joined table of Teacher and Course
         }
         catch (Exception e)
         {
             new StudentGUI().ShowMessage(e.getMessage());
-            return null;
+            return null;        // in case of failure
         }
     }
 }

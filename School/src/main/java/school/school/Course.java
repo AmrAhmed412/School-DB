@@ -8,6 +8,9 @@ package school.school;
  *
  * @author User
  */
+
+
+// Emulating the Course table in the DB
 public class Course {
     private int ID;
     private String Name;
@@ -37,6 +40,4 @@ public class Course {
     public void setName(String Name) {
         this.Name = Name;
     }
-    
-    
 }

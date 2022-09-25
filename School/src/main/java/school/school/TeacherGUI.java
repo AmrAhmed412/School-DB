@@ -27,6 +27,8 @@ public class TeacherGUI extends javax.swing.JFrame {
         // Filling the table with all teachers
         UpdateTeacherTable();
     }
+    
+    // Shows a window with that message
     public void ShowMessage(String Message)
     {
         JOptionPane.showMessageDialog(this,Message);
@@ -311,6 +313,7 @@ public class TeacherGUI extends javax.swing.JFrame {
             {
                  T.setID(Integer.parseInt(TCHID_DelTB.getText()));
                  new TeacherRepo().DeleteTeacher(T); 
+                 // Deletes teacher from DB
             }
             catch(Exception e)
             {
@@ -319,22 +322,23 @@ public class TeacherGUI extends javax.swing.JFrame {
        
         }  
         UpdateTeacherTable();
-        // Deleting that teacher's course data
+        // Shows the table after the update
     }//GEN-LAST:event_DelBtnTCHActionPerformed
 
     private void TCH_ShowAllCoursesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TCH_ShowAllCoursesActionPerformed
-        
-       if (TCHID_DelTB.getText().equals(""))
+        // Checking if there is an empty text box
+        if (TCHID_DelTB.getText().equals(""))
         {
             UpdateTeacherCourseTable();     // In case ID text field is empty, show all Teacher courses
         }
         else
         {
-           try{
-               Teacher T = new Teacher();
-               T.setID(Integer.parseInt(TCHID_DelTB.getText()));
-            UpdateTeacherCourseTable("Where Teacher.ID = " + T.getID());
-           }
+            try{
+                Teacher T = new Teacher();
+                T.setID(Integer.parseInt(TCHID_DelTB.getText()));
+                UpdateTeacherCourseTable("Where Teacher.ID = " + T.getID());
+                // Shows all courses taught by that teacher
+            }
             catch(Exception e)
             {
                 ShowMessage(e.getMessage());
@@ -343,7 +347,7 @@ public class TeacherGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_TCH_ShowAllCoursesActionPerformed
 
     private void TeachBtnTCHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TeachBtnTCHActionPerformed
-        
+        // Checking if there is an empty text box
         if (TCH_ID_Teach_Text.getText().equals(""))
         {
             ShowMessage("Teacher ID Field is empty.");
@@ -360,6 +364,7 @@ public class TeacherGUI extends javax.swing.JFrame {
                 T.setID(Integer.parseInt(TCH_ID_Teach_Text.getText()));
                 CRS.setID(Integer.parseInt(TCH_CourseID_Teach_Text.getText()));
                 new TeacherCourseService().Enroll(T, CRS);
+                // Adds a course to the teacher
             }
              catch(Exception e)
             {
@@ -367,11 +372,12 @@ public class TeacherGUI extends javax.swing.JFrame {
             }
         }
         UpdateTeacherCourseTable();
+        // Shows the table after the update
     }//GEN-LAST:event_TeachBtnTCHActionPerformed
 
     private void AddBtnTCHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddBtnTCHActionPerformed
         // Checking if there is an empty text box
-       if (TCH_IDText_ADD.getText().equals(""))
+        if (TCH_IDText_ADD.getText().equals(""))
         {
             ShowMessage("Teacher ID Field is empty.");
         }
@@ -394,6 +400,7 @@ public class TeacherGUI extends javax.swing.JFrame {
             try{
                 Teacher T = new Teacher(Integer.parseInt(TCH_IDText_ADD.getText()), TCHNameText_ADD.getText(), TCH_Address.getText(),  TCH_Num.getText(), null, Integer.parseInt(Salary), Integer.parseInt(Ex));
                 new TeacherRepo().AddTeacher(T);
+                // Adds teacher to DB
             }
             catch(Exception e)
             {
@@ -401,7 +408,7 @@ public class TeacherGUI extends javax.swing.JFrame {
             }
         }
         UpdateTeacherTable();
-        // in case all fields have been filled, add the teacher
+        // Shows the table after the update
     }//GEN-LAST:event_AddBtnTCHActionPerformed
 
     private void TCH_AddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TCH_AddressActionPerformed
@@ -415,8 +422,8 @@ public class TeacherGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_TCH_ShowAllTeachersActionPerformed
 
     private void EditBtnTCHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditBtnTCHActionPerformed
-         // Checking if there is an empty text box
-       if (TCH_IDText_ADD.getText().equals(""))
+        // Checking if there is an empty text box
+        if (TCH_IDText_ADD.getText().equals(""))
         {
             ShowMessage("Student ID Field is empty.");
         }
@@ -432,9 +439,10 @@ public class TeacherGUI extends javax.swing.JFrame {
             {
                 Ex = "-1";    // assigning a default value
             }
-             try{
+            try{
                 Teacher T = new Teacher(Integer.parseInt(TCH_IDText_ADD.getText()), TCHNameText_ADD.getText(), TCH_Address.getText(),  TCH_Num.getText(), null, Integer.parseInt(Salary), Integer.parseInt(Ex));
                 new TeacherRepo().EditTeacher(T);
+                // Edits teacher info
             }
             catch(Exception e)
             {
@@ -442,9 +450,11 @@ public class TeacherGUI extends javax.swing.JFrame {
             }
         }
         UpdateTeacherTable();
+        // Shows the table after the update
     }//GEN-LAST:event_EditBtnTCHActionPerformed
 
     private void DropBtnTCHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DropBtnTCHActionPerformed
+        // Checks for empty fields
         if (TCH_ID_Teach_Text.getText().equals(""))
         {
             ShowMessage("Teacher ID Field is empty.");
@@ -461,16 +471,19 @@ public class TeacherGUI extends javax.swing.JFrame {
                 T.setID(Integer.parseInt(TCH_ID_Teach_Text.getText()));
                 CRS.setID(Integer.parseInt(TCH_CourseID_Teach_Text.getText()));
                 new TeacherCourseService().Drop(T, CRS);
+                // Drops a course from the teacher
             }
-             catch(Exception e)
+            catch(Exception e)
             {
                 ShowMessage(e.getMessage());
             }
         }
           UpdateTeacherCourseTable();
+          // Shows the table after the update
     }//GEN-LAST:event_DropBtnTCHActionPerformed
      public void UpdateTeacherTable()
     {
+        // Shows the Teacher table
         UpdateTeacherTable("");
     }
 
@@ -509,6 +522,7 @@ public class TeacherGUI extends javax.swing.JFrame {
     }
     public void UpdateTeacherCourseTable()
     {
+        // Shows the TeacherCourse table
         UpdateTeacherCourseTable("");
     }
 

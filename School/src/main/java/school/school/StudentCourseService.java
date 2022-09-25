@@ -10,52 +10,55 @@ import java.sql.ResultSet;
  *
  * @author User
  */
+
+// Connects the Student Table to the Course Table
 public class StudentCourseService {
     
-    public void Enroll(Student STD, Course CRS, String Grade)
+    // Adds a Course to the student
+    public void Enroll(StudentCourse STD_CRS)
     {
         try {
-            int count =  School.s.executeUpdate("insert into StudentCourse values ("+ STD.getID() +","+CRS.getID()+",'"+Grade +"')");
-            // The query that adds a student to the School database
+            int count = School.s.executeUpdate("insert into StudentCourse values ("+ STD_CRS.getStudentID() +","+STD_CRS.getCourseID()+",'"+STD_CRS.getGrade() +"')");
+            // The query that adds a course to the student
         } catch (Exception ex) {
-            // n3ml function tsha8al el button b resala
-//            new StudentGUI().ShowMessage("Error has occured, please make sure all the data entered is correct");
             new StudentGUI().ShowMessage(ex.getMessage());
         }
     }
     
+    // Drops a student from the Course
     public void Drop(Student STD, Course CRS)
     {
         try{
+            // Query to delete a course from the student's courses
             int count =  School.s.executeUpdate("Delete From StudentCourse Where StudentID = "+ STD.getID() + " AND CourseID = " + CRS.getID());
         } catch (Exception ex) {
             new StudentGUI().ShowMessage(ex.getMessage());
         }
-        
     }
     
-    public void EditGrade(Student STD, Course CRS, String Grade)
+    // Edits the grade of a student
+    public void EditGrade(StudentCourse STD_CRS)
     {
         try {
-            int count =  School.s.executeUpdate("Update StudentCourse Set Grade = '"+ Grade +"' Where StudentID = "+ STD.getID() + " AND CourseID = " + CRS.getID());
-            // The query that adds a student to the School database
+            int count =  School.s.executeUpdate("Update StudentCourse Set Grade = '"+ STD_CRS.getGrade() +"' Where StudentID = "+ STD_CRS.getStudentID() + " AND CourseID = " + STD_CRS.getCourseID());
+            // The query that edits student's course grade
         } catch (Exception ex) {
-            // n3ml function tsha8al el button b resala
-//            new StudentGUI().ShowMessage("Error has occured, please make sure all the data entered is correct");
             new StudentGUI().ShowMessage(ex.getMessage());
         }
     }
     
+    // Shows Student and Course table
     public ResultSet ShowTable(String str)
     {
         try
         {
             return School.s.executeQuery("Select Student.ID as 'StudentID', Course.ID as 'CourseID', Student.StudentName, Course.CourseName, StudentCourse.Grade  from Student  INNER JOIN StudentCourse  ON Student.ID = StudentCourse.StudentID INNER JOIN Course ON StudentCourse.CourseID = Course.ID " + str);
+            // Query that shows the joined table of Student and Course
         }
         catch (Exception e)
         {
             new StudentGUI().ShowMessage(e.getMessage());
-            return null;
+            return null;    // in case of failure
         }
     }
 }

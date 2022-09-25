@@ -354,6 +354,7 @@ public class StudentGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_StudentAddressTXTActionPerformed
     
+    // Opens a window box with the message
     public void ShowMessage(String Message)
     {
         JOptionPane.showMessageDialog(this,Message);
@@ -362,6 +363,7 @@ public class StudentGUI extends javax.swing.JFrame {
     // Overloading the function with empty strings to avoid the where clause
     public void UpdateStudentTable()
     {
+        // Shows the Student table
         UpdateStudentTable("");
     }
 
@@ -402,6 +404,7 @@ public class StudentGUI extends javax.swing.JFrame {
     // Overloading the function with empty strings to avoid the where clause
     public void UpdateStudentCourseTable()
     {
+        // Shows the StudentCourse table
         UpdateStudentCourseTable("");
     }
 
@@ -463,6 +466,7 @@ public class StudentGUI extends javax.swing.JFrame {
             try{
                 Student STD = new Student(Integer.parseInt(STD_IDText_ADD.getText()), STDNameText_ADD.getText(), StudentAddressTXT.getText(),  STDNumber.getText(), null, Integer.parseInt(Age), Integer.parseInt(Fees));
                 new StudentRepo().AddStudent(STD);
+                // Adds student to DB table
             }
             catch(Exception e)
             {
@@ -470,10 +474,10 @@ public class StudentGUI extends javax.swing.JFrame {
             }
         }
         UpdateStudentTable();
+        // Shows the table after the addition
     }//GEN-LAST:event_AddBtnSTDActionPerformed
 
     private void STD_ShowAllCoursesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_STD_ShowAllCoursesActionPerformed
-        // TODO add your handling code here:
         // Checking if there is an empty text box
         if (STD_ID_TXT.getText().equals(""))
         {
@@ -487,13 +491,13 @@ public class StudentGUI extends javax.swing.JFrame {
                 Student STD = new Student();
                 STD.setID(Integer.parseInt(STD_ID_TXT.getText()));
                 UpdateStudentCourseTable("Where Student.ID = " + STD.getID());
+                // Shows the courses of that specific student
             }
             catch(Exception e)
             {
                 ShowMessage(e.getMessage());
             }
         }
-//        else S.Table_Data_Filling(STD_DataTable," Where ID ="+STDShowAllCoursesText.getText()); // Filling the table with the student's courses
     }//GEN-LAST:event_STD_ShowAllCoursesActionPerformed
 
     private void DelBtnSTDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DelBtnSTDActionPerformed
@@ -508,6 +512,7 @@ public class StudentGUI extends javax.swing.JFrame {
             try{
                 STD.setID(Integer.parseInt(STD_ID_TXT.getText()));
                 new StudentRepo().DeleteStudent(STD);
+                // Deletes the student from the DB
             }
             catch(Exception e)
             {
@@ -516,6 +521,7 @@ public class StudentGUI extends javax.swing.JFrame {
             
         }
         UpdateStudentTable();
+        // Shows the table after the update
     }//GEN-LAST:event_DelBtnSTDActionPerformed
 
     private void EditBtnSTDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditBtnSTDActionPerformed
@@ -539,6 +545,7 @@ public class StudentGUI extends javax.swing.JFrame {
             try{
                 Student STD = new Student(Integer.parseInt(STD_IDText_ADD.getText()), STDNameText_ADD.getText(), StudentAddressTXT.getText(),  STDNumber.getText(), null, Integer.parseInt(Age), Integer.parseInt(Fees));
                 new StudentRepo().EditStudent(STD);
+                // Edits the student's info
             }
             catch(Exception e)
             {
@@ -546,10 +553,10 @@ public class StudentGUI extends javax.swing.JFrame {
             }
         }
         UpdateStudentTable();
+        // Shows the table after the update
     }//GEN-LAST:event_EditBtnSTDActionPerformed
 
     private void STD_ShowAllStudentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_STD_ShowAllStudentsActionPerformed
-        // TODO add your handling code here:
         // Filling the table with all students
         UpdateStudentTable();
     }//GEN-LAST:event_STD_ShowAllStudentsActionPerformed
@@ -559,7 +566,6 @@ public class StudentGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_STDageActionPerformed
 
     private void DropCourseBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DropCourseBTNActionPerformed
-        // TODO add your handling code here:
         // Checking if there is an empty text box
         if (STD_ID_Drop.getText().equals(""))
         {
@@ -577,6 +583,7 @@ public class StudentGUI extends javax.swing.JFrame {
                 STD.setID(Integer.parseInt(STD_ID_Drop.getText()));
                 CRS.setID(Integer.parseInt(STD_CourseID_Drop.getText()));
                 new StudentCourseService().Drop(STD, CRS);
+                // Removes the course from the student
             }
             catch(Exception e)
             {
@@ -585,10 +592,11 @@ public class StudentGUI extends javax.swing.JFrame {
             
         }
         UpdateStudentCourseTable();
+        // Shows the table after the update
     }//GEN-LAST:event_DropCourseBTNActionPerformed
 
     private void EnrollCourseBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnrollCourseBTNActionPerformed
-        // TODO add your handling code here:
+        // Checking for empty fields
         if (STD_CRS_ID.getText().equals(""))
         {
             ShowMessage("Student ID Field is empty.");
@@ -599,18 +607,9 @@ public class StudentGUI extends javax.swing.JFrame {
         }
         else
         {
-            String Grade = STD_Grade.getText().toUpperCase();
-            if (STD_Grade.getText().equals(""))
-            {
-                Grade = "U";     // assigning a default value of Undetermined
-            }
             try{
-                Student STD = new Student();
-                STD.setID(Integer.parseInt(STD_CRS_ID.getText()));
-                
-                Course CRS = new Course();
-                CRS.setID(Integer.parseInt(STD_CourseID.getText()));
-                new StudentCourseService().Enroll(STD, CRS, Grade);
+                StudentCourse STD_CRS = new StudentCourse(Integer.parseInt(STD_CRS_ID.getText()), Integer.parseInt(STD_CourseID.getText()), STD_Grade.getText());
+                new StudentCourseService().Enroll(STD_CRS);
             }
             catch(Exception e)
             {
@@ -618,10 +617,11 @@ public class StudentGUI extends javax.swing.JFrame {
             }
         }
         UpdateStudentCourseTable();
+        // Shows the table after the update
     }//GEN-LAST:event_EnrollCourseBTNActionPerformed
 
     private void AddBtnSTD2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddBtnSTD2ActionPerformed
-        // TODO add your handling code here:
+        // Checking for empty fields
         if (STD_CRS_ID.getText().equals(""))
         {
             ShowMessage("Student ID Field is empty.");
@@ -636,12 +636,9 @@ public class StudentGUI extends javax.swing.JFrame {
         }
         else {
             try{
-                Student STD = new Student();
-                STD.setID(Integer.parseInt(STD_CRS_ID.getText()));
-                
-                Course CRS = new Course();
-                CRS.setID(Integer.parseInt(STD_CourseID.getText()));
-                new StudentCourseService().EditGrade(STD, CRS, STD_Grade.getText().toUpperCase());
+                StudentCourse STD_CRS = new StudentCourse(Integer.parseInt(STD_CRS_ID.getText()), Integer.parseInt(STD_CourseID.getText()), STD_Grade.getText());
+                new StudentCourseService().EditGrade(STD_CRS);
+                // Edits course grade of student
             }
             catch(Exception e)
             {
@@ -649,6 +646,7 @@ public class StudentGUI extends javax.swing.JFrame {
             }
         }
         UpdateStudentCourseTable();
+        // Shows the table after the update
     }//GEN-LAST:event_AddBtnSTD2ActionPerformed
     
     /**

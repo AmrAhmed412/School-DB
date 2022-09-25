@@ -10,6 +10,8 @@ import java.sql.ResultSet;
  *
  * @author User
  */
+
+// Handles the functions of the Course Table
 public class CourseRepo {
     
     // Function to add Courses
@@ -19,9 +21,8 @@ public class CourseRepo {
             int count =  School.s.executeUpdate("insert into Course values ("+ CRS.getID() +",'"+CRS.getName()+"')");
             // The query that adds a Course to the School database
         } catch (Exception ex) {
-            new CoursesGUI().ShowMessage("Error has occured, please make sure all the data entered is correct");
+            new CoursesGUI().ShowMessage(ex.getMessage());
         }
-//        Table_Data_Filling(CRS_DataTable);  // Showing the table after modification
     }
 
     // Function to edit Course name
@@ -30,11 +31,9 @@ public class CourseRepo {
         try {
             int count =  School.s.executeUpdate("Update Course Set CourseName = '"+CRS.getName()+"' Where ID = "+ CRS.getID());
             // The query that edits a Course's name
-
         } catch (Exception ex) {
-            new CoursesGUI().ShowMessage("Error has occured, please make sure all the data entered is correct");
+            new CoursesGUI().ShowMessage(ex.getMessage());
         }
-//            Table_Data_Filling(CRS_DataTable);  // Showing the table after modification
     }
 
     // Function to delete Course
@@ -44,21 +43,22 @@ public class CourseRepo {
             int count =  School.s.executeUpdate("Delete From Course Where ID = "+ CRS.getID());
             // The query that deletes a Course from the database
         } catch (Exception ex) {
-            new CoursesGUI().ShowMessage("Error has occured, please make sure all the data entered is correct");
+            new CoursesGUI().ShowMessage(ex.getMessage());
         }
-//            Table_Data_Filling(CRS_DataTable);  // Showing the table after modification
     }
     
+    // Function to show Course table
     public ResultSet ShowTable(String str)
     {
         try
         {
             return School.s.executeQuery("Select * from Course " + str);
+            // Query that shows Course table
         }
         catch (Exception e)
         {
             new CoursesGUI().ShowMessage(e.getMessage());
-            return null;
+            return null;    // in case of failure
         }
     }
 }

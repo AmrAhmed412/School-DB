@@ -13,7 +13,8 @@ public class Person {
     private String Name;
     private String Address;
     private String Number;
-    private ArrayList<Course> Courses = new ArrayList<Course>();
+    
+    private ArrayList<Course> Courses = new ArrayList<Course>();    // Courses student is enrolled in, or teacher teaches
     
     Person(){}
     Person (int ID, String Name, String Address, String Number, ArrayList<Course> Courses)
@@ -32,7 +33,7 @@ public class Person {
 
     public void setID(int ID) {
         if(ID < 1)
-            ID = 1;   // Then Database rejects it if its not unique
+            ID = 1;   // Then Database rejects it if it's not unique
         this.ID = ID;
     }
 
@@ -59,7 +60,7 @@ public class Person {
     public void setNumber(String Number) {
         try
         {
-            if (!Number.isEmpty())
+            if (!Number.isEmpty())  // if it's not empty, try to parse it
                 Integer.parseInt(Number);
             this.Number = Number;
         }

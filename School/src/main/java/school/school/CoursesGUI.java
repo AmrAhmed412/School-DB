@@ -242,6 +242,7 @@ public class CoursesGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
+    // Opens a window with the message
     public void ShowMessage(String Message)
     {
         JOptionPane.showMessageDialog(this,Message);
@@ -250,6 +251,7 @@ public class CoursesGUI extends javax.swing.JFrame {
     // Overloading the function with empty strings to avoid the where clause
     public void UpdateCourseTable()
     {
+        // Shows the course table
         UpdateCourseTable("");
     }
 
@@ -286,6 +288,7 @@ public class CoursesGUI extends javax.swing.JFrame {
     // Overloading the function with empty strings to avoid the where clause
     public void UpdateStudentCourseTable()
     {
+        // Shows the StudentCourse table
         UpdateStudentCourseTable("");
     }
 
@@ -325,6 +328,7 @@ public class CoursesGUI extends javax.swing.JFrame {
     // Overloading the function with empty strings to avoid the where clause
     public void UpdateTeacherCourseTable()
     {
+        // Shows the TeacherCourse table
         UpdateTeacherCourseTable("");
     }
 
@@ -373,6 +377,7 @@ public class CoursesGUI extends javax.swing.JFrame {
                 Course CRS = new Course();
                 CRS.setID(Integer.parseInt(CRS_CourseID_Del_Text.getText()));
                 new CourseRepo().DeleteCourse(CRS);
+                // Deletes a course from the DB
             }
             catch (Exception e)
             {
@@ -380,7 +385,7 @@ public class CoursesGUI extends javax.swing.JFrame {
             }
         }
         UpdateCourseTable();
-        // Deleting that Course's data
+        // Shows the table after the update
     }//GEN-LAST:event_DelBtnCRSActionPerformed
 
     private void CRS_ShowAllTeachersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CRS_ShowAllTeachersActionPerformed
@@ -393,13 +398,14 @@ public class CoursesGUI extends javax.swing.JFrame {
            try{
                Course CRS = new Course();
                CRS.setID(Integer.parseInt(CRSShowAllCoursesText.getText()));
-            UpdateTeacherCourseTable("Where Course.ID = " + CRS.getID());
-           }
+               UpdateTeacherCourseTable("Where Course.ID = " + CRS.getID());
+               // Shows the teachers teaching that course
+            }
             catch(Exception e)
             {
                 ShowMessage(e.getMessage());
             }
-        } // Filling the table with the Course's students 
+        } 
     }//GEN-LAST:event_CRS_ShowAllTeachersActionPerformed
 
     private void EditBtnCRSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditBtnCRSActionPerformed
@@ -418,6 +424,7 @@ public class CoursesGUI extends javax.swing.JFrame {
             {
                 Course CRS = new Course(Integer.parseInt(CRS_CourseID_Edit_Text.getText()), CRS_NewName_Edit_Text.getText());
                 new CourseRepo().EditCourse(CRS);
+                // Edits course name
             }
             catch (Exception E)
             {
@@ -425,8 +432,7 @@ public class CoursesGUI extends javax.swing.JFrame {
             }
         }
         UpdateCourseTable();
-//            c.EditCourse(CRS_NewName_Edit_Text.getText(), CRS_CourseID_Edit_Text.getText(), CRS_DataTable);
-        // Editing that Course's name
+        // Shows the table after the update
     }//GEN-LAST:event_EditBtnCRSActionPerformed
 
     private void AddBtnCRSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddBtnCRSActionPerformed
@@ -445,6 +451,7 @@ public class CoursesGUI extends javax.swing.JFrame {
             {
                 Course CRS = new Course(Integer.parseInt(CRS_IDText_ADD.getText()), CRSNameText_ADD.getText());
                 new CourseRepo().AddCourse(CRS);
+                // Adds course to DB
             }
             catch (Exception e)
             {
@@ -452,7 +459,7 @@ public class CoursesGUI extends javax.swing.JFrame {
             } 
         }
         UpdateCourseTable();
-        // in case all fields have been filled, add the Course
+        // Shows the table after the update
     }//GEN-LAST:event_AddBtnCRSActionPerformed
 
     private void CRS_ShowAllStudentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CRS_ShowAllStudentsActionPerformed
@@ -465,14 +472,15 @@ public class CoursesGUI extends javax.swing.JFrame {
         {
             try{
                 Course CRS = new Course();
-            CRS.setID(Integer.parseInt(CRSShowAllCoursesText.getText()));
-            UpdateStudentCourseTable("Where Course.ID = " + CRS.getID());
+                CRS.setID(Integer.parseInt(CRSShowAllCoursesText.getText()));
+                UpdateStudentCourseTable("Where Course.ID = " + CRS.getID());
+                // Shows all students taking that course
             }
             catch(Exception e)
             {
                  ShowMessage(e.getMessage());
             }  
-        } // Filling the table with the Course's students 
+        }
     }//GEN-LAST:event_CRS_ShowAllStudentsActionPerformed
 
     private void CRS_ShowAllCoursesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CRS_ShowAllCoursesActionPerformed
