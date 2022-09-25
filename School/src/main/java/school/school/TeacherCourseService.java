@@ -14,7 +14,27 @@ public class TeacherCourseService {
     
     
     
+     public void Enroll(Teacher T, Course CRS)
+    {
+        try {
+            int count =  School.s.executeUpdate("insert into TeacherCourse values ("+ T.getID() +","+CRS.getID()+")");
+            // The query that adds a student to the School database
+        } catch (Exception ex) {
+            // n3ml function tsha8al el button b resala
+
+            new TeacherGUI().ShowMessage(ex.getMessage());
+        }
+    }
     
+    public void Drop(Teacher T, Course CRS)
+    {
+        try{
+            int count =  School.s.executeUpdate("Delete From TeacherCourse Where TeacherID = "+ T.getID() + " AND CourseID = " + CRS.getID());
+        } catch (Exception ex) {
+            new TeacherGUI().ShowMessage(ex.getMessage());
+        }
+        
+    }
     public ResultSet ShowTable(String str)
     {
         try

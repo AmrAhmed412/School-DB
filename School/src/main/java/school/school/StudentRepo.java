@@ -33,19 +33,19 @@ public class StudentRepo {
         try {
             if (!STD.getName().isEmpty())   // updates student name
             {
-                System.out.println("name");
+                
                 int count =  School.s.executeUpdate("Update Student Set StudentName = '"+STD.getName()+"' Where ID = "+ STD.getID());
             }
             
             if (!STD.getAddress().isEmpty())   // updates student address
             {
-                System.out.println("address");
+                
                 int count =  School.s.executeUpdate("Update Student Set StudentAddress= '"+STD.getAddress()+"' Where ID = "+ STD.getID());
             }
             
             if (!STD.getNumber().isEmpty())   // updates student number
             {
-                System.out.println("number");
+                
                 int count =  School.s.executeUpdate("Update Student Set PhoneNumber = '"+STD.getNumber()+"' Where ID = "+ STD.getID());
             }
             

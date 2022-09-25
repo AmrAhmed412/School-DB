@@ -29,7 +29,7 @@ public class Teacher extends Person
     }
 
     public void setSalary(int Salary) {
-        if (Salary < 1000)
+        if (Salary < 1000 && Salary != -1)
             Salary = 1000;
         this.Salary = Salary;
     }
@@ -39,7 +39,7 @@ public class Teacher extends Person
     }
 
     public void setExperienceYears(int ExperienceYears) {
-        if (ExperienceYears > 45)
+        if (ExperienceYears > 45 && ExperienceYears != -1)
             ExperienceYears = 2;
         this.ExperienceYears = ExperienceYears;
     }

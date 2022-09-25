@@ -390,9 +390,15 @@ public class CoursesGUI extends javax.swing.JFrame {
         }
         else
         {
-            Course CRS = new Course();
-            CRS.setID(Integer.parseInt(CRSShowAllCoursesText.getText()));
+           try{
+               Course CRS = new Course();
+               CRS.setID(Integer.parseInt(CRSShowAllCoursesText.getText()));
             UpdateTeacherCourseTable("Where Course.ID = " + CRS.getID());
+           }
+            catch(Exception e)
+            {
+                ShowMessage(e.getMessage());
+            }
         } // Filling the table with the Course's students 
     }//GEN-LAST:event_CRS_ShowAllTeachersActionPerformed
 
@@ -457,9 +463,15 @@ public class CoursesGUI extends javax.swing.JFrame {
         }
         else
         {
-            Course CRS = new Course();
+            try{
+                Course CRS = new Course();
             CRS.setID(Integer.parseInt(CRSShowAllCoursesText.getText()));
             UpdateStudentCourseTable("Where Course.ID = " + CRS.getID());
+            }
+            catch(Exception e)
+            {
+                 ShowMessage(e.getMessage());
+            }  
         } // Filling the table with the Course's students 
     }//GEN-LAST:event_CRS_ShowAllStudentsActionPerformed
 
