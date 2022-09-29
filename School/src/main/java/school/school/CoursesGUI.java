@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package school.school;
+import school.repo.CourseRepo;
 import javax.swing.*;
 import javax.swing.table.TableModel;
 import java.sql.ResultSet;

@@ -11,7 +11,7 @@ package school.school;
 
 // Emulating the StudentCourse table in the DB
 public class StudentCourse {
-    int StudentID;
+    int StudentID;      // kan el a7sn yb2a obj mn student
     int CourseID;
     String Grade;
     
