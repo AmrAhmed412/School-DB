@@ -1,0 +1,14 @@
+school\school\web\model\Course.class
+school\school\web\model\Person.class
+school\school\web\model\Teacher.class
+school\school\web\repo\CourseRepo.class
+school\school\web\model\StudentCourse.class
+school\school\web\services\TeacherCourseService.class
+school\school\web\services\StudentCourseService.class
+school\school\web\TeacherController.class
+school\school\web\repo\StudentRepo.class
+school\school\web\CourseController.class
+school\school\web\model\School.class
+school\school\web\repo\TeacherRepo.class
+school\school\web\StudentController.class
+school\school\web\model\Student.class
